@@ -1,0 +1,655 @@
+{%extends "base.html"%}
+
+{% block headercss %}
+
+
+
+{% endblock %}
+
+{% block contentWrapper%}
+
+<div class="content-wrapper">
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+
+
+
+            <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title" style="float:left">生成规则    </h3>
+                 <a style="float:right" onclick='window.open("https://suricata.readthedocs.io/en/suricata-5.0.3/rules/index.html")'>&nbsp;&nbsp;&nbsp;&nbsp;规则</a>
+            </div>
+
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal" id="suriform" action="#" method="POST">
+			  {% csrf_token %}
+
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="action" class="col-sm-2 control-label">行为(action) <span style="color:red">*</span></label>
+
+                  <div class="col-sm-9">
+                      <select class="form-control" id="action" name="action">
+                          <option value="alert">alert</option>
+                          <option value="pass">pass</option>
+                          <option value="drop">drop</option>
+                          <option value="reject">reject</option>
+                      </select>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label for="protocol" class="col-sm-2 control-label">协议(protocol) <span style="color:red">*</span></label>
+
+                  <div class="col-sm-6">
+                      <select class="form-control" id="protocol" name="protocol" onchange="clickProtocl(this)">
+                          <option value="tcp">tcp</option>
+                          <option value="udp">udp</option>
+                          <option value="http">http</option>
+                          <option value="else">其他</option>
+                      </select>
+                  </div>
+                    <div class="col-sm-3" style="display:none" id="protocol_else_div">
+                      <input class="form-control" id="protocol_else" name="protocol_else" />
+
+                  </div>
+
+                </div>
+
+              <div class="form-group">
+                  <label for="src_ip" class="col-sm-2 control-label">源地址 源端口 <span style="color:red">*</span></label>
+
+                  <div class="col-sm-6">
+                      <input class="form-control" id="src_ip" name="src_ip" value="any" />
+                  </div>
+
+                  <div class="col-sm-3">
+                      <input class="form-control" id="src_port" name="src_port" value="any"/>
+                  </div>
+
+                </div>
+              <div class="form-group">
+                  <label for="des_ip" class="col-sm-2 control-label">目的地址 目的端口 <span style="color:red">*</span></label>
+
+                  <div class="col-sm-6">
+                      <input class="form-control" id="des_ip" name="des_ip" value="any" />
+                  </div>
+
+                  <div class="col-sm-3">
+                      <input class="form-control" id="des_port" name="des_port" value="any"/>
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <label for="direction" class="col-sm-2 control-label">方向(direction) <span style="color:red">*</span></label>
+
+                  <div class="col-sm-9">
+                      <select class="form-control" id="direction" name="direction">
+                          <option value="<>">双向(<>)</option>
+                          <option value="->">单向(->)</option>
+                          <option value="<-">单向(<-)</option>
+
+                      </select>
+                  </div>
+
+                </div>
+              <div class="form-group">
+                  <label for="msg" class="col-sm-2 control-label">msg <span style="color:red">*</span></label>
+
+                  <div class="col-sm-9">
+                      <input class="form-control" id="msg" name="msg" />
+                  </div>
+
+                </div>
+              <div class="form-group">
+                  <label for="sid" class="col-sm-2 control-label">sid <span style="color:red">*</span></label>
+
+                  <div class="col-sm-9">
+                      <input class="form-control" id="sid" name="sid" />
+                  </div>
+
+                </div>
+                  <div class="form-group">
+                  <label for="classtype" class="col-sm-2 control-label">classtype</label>
+
+                  <div class="col-sm-9">
+                      <input class="form-control" id="classtype" name="classtype" />
+                  </div>
+
+                </div>
+                  <div class="form-group">
+                  <label for="rev" class="col-sm-2 control-label">rev <span style="color:red">*</span></label>
+
+                  <div class="col-sm-9">
+                      <input class="form-control" id="rev" name="rev" oninput = "value=value.replace(/[^\d]/g,'')" value="1"/>
+                  </div>
+
+                </div>
+              <div class="form-group">
+                  <label for="flow" class="col-sm-2 control-label">flow</label>
+
+                  <div class="col-sm-9">
+
+                      <select id="flow" name="flow" class="selectpicker show-tick form-control"  multiple>
+                          <option value="to_client" >to_client</option>
+                          <option value="to_server" >to_server</option>
+                          <option value="from_client" >from_client</option>
+                          <option value="from_server" >from_server</option>
+                          <option value="established" >established</option>
+                          <option value="not_established" >not_established</option>
+                          <option value="only_frag" >only_frag</option>
+
+
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+                <div class="form-group">
+                  <label for="content" class="col-sm-2 control-label">content<br><br><button type = "button"  class="btn btn-primary" onclick="addContent()">添加CONTENT</button></label>
+                    <div class="col-sm-9">
+
+
+                <table class="table table-bordered table-striped dataTable" role="grid" width="100%"><tbody id="tbody_content">
+
+                            <tr role="row">
+                                <td width="90%">
+                                    <div class="form-group">
+                                      <label  class="col-sm-2 control-label">content</label>
+                                      <div class="col-sm-4">
+                                          <input class="form-control" name="content" />
+                                      </div>
+                                        <label  class="col-sm-1 control-label">nocase</label>
+                                        <div class="col-sm-1 checkbox">
+                                            <input type="checkbox" name="nocase">
+                                      </div>
+                                        <label  class="col-sm-1 control-label">startswith</label>
+                                        <div class="col-sm-1 checkbox">
+                                            <input type="checkbox" name="startswith">
+                                      </div>
+                                        <label  class="col-sm-1 control-label">endswith</label>
+                                        <div class="col-sm-1 checkbox">
+                                            <input type="checkbox" name="endswith">
+                                      </div>
+                                  </div>
+
+                                    <div class="form-group">
+                                      <label  class="col-sm-2 control-label">depth</label>
+                                      <div class="col-sm-4">
+                                          <input class="form-control" name="depth" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="请输入数字"/>
+                                      </div>
+                                      <label  class="col-sm-2 control-label">offset</label>
+                                      <div class="col-sm-4">
+                                          <input class="form-control" name="offset" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="请输入数字"/>
+                                      </div>
+
+                                  </div>
+
+                                    <div class="form-group">
+                                    <label  class="col-sm-2 control-label">distance</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" name="distance" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="请输入数字"/>
+                                      </div>
+                                      <label  class="col-sm-2 control-label">within</label>
+                                      <div class="col-sm-4">
+                                          <input class="form-control" name="within" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="请输入数字"/>
+                                      </div>
+
+                                  </div>
+
+                                    <div class="form-group">
+                                    <label  class="col-sm-2 control-label">isdataat</label>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" name="isdataat" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="请输入数字"/>
+                                      </div>
+                                        <div class="col-sm-1 checkbox">
+                                            <input type="checkbox" name="relative">relative
+                                      </div>
+                                      <label  class="col-sm-2 control-label">bsize</label>
+                                      <div class="col-sm-4">
+                                          <input class="form-control" name="bsize" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="请输入数字"/>
+                                      </div>
+
+                                  </div>
+
+                                    <div class="form-group">
+                                    <label  class="col-sm-2 control-label">pcre</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" name="pcre" />
+                                      </div>
+
+
+                                  </div>
+
+                                </td>
+                                <td><a onclick="delR(this)">删除</a></td>
+                            </tr>
+
+                        </tbody></table>
+
+                        </div>
+                </div>
+
+              <!-- /.box-body -->
+              <div class="box-footer" >
+
+
+                  <div class="form-group">
+                      <div class="col-sm-2"><button type="button" class="btn btn-info" onclick="createRule()">生成规则</button></div><!--createRule-->
+
+					<div class="col-sm-9">
+                        <textarea class="form-control" id="rules" name="rules" rows="4" placeholder="suricata规则"></textarea>
+					</div>
+
+				</div>
+
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+	</section>
+</div>
+{% endblock %}
+{% block bodyjs %}
+
+<script src="/static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+
+            $('.selectpicker').selectpicker({});
+        });
+    </script>
+    <script>
+        function clickProtocl(obj){
+            proto = $(obj).val();
+            if (proto=="else"){
+                $("#protocol_else_div").show();
+            }else{
+                $("#protocol_else_div").hide();
+            }
+        }
+
+    </script>
+    <script>
+        function addContent1(){
+            //var pname = $(obj).parent().find('input').prop("name");
+            selectobj=regTxtOpt();
+            $(selectobj).selectpicker('refresh');
+        }
+
+        function addContent(){
+            var tbody = document.getElementById('tbody_content');
+            var trobj=document.createElement("tr");
+            trobj.setAttribute('role','row');
+
+            var tdobj0=document.createElement("td");
+            tdobj0.setAttribute('width',"90%");
+            //----------------
+
+            var divform1 = document.createElement("div");
+            divform1.setAttribute('class',"form-group");
+            var labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-2 control-label");
+            labelobj.innerText="content";
+            divform1.appendChild(labelobj);
+            var divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-4");
+            var inputobj=document.createElement("input");
+            inputobj.setAttribute('class',"form-control");
+            inputobj.setAttribute('name',"content");
+            divcol.appendChild(inputobj);
+            divform1.appendChild(divcol);
+
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-1 control-label");
+            labelobj.innerText="nocase";
+            divform1.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-1 checkbox");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('type',"checkbox");
+            inputobj.setAttribute('name',"nocase");
+            divcol.appendChild(inputobj);
+            divform1.appendChild(divcol);
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-1 control-label");
+            labelobj.innerText="startswith";
+            divform1.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-1 checkbox");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('type',"checkbox");
+            inputobj.setAttribute('name',"startswith");
+            divcol.appendChild(inputobj);
+            divform1.appendChild(divcol);
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-1 control-label");
+            labelobj.innerText="endswith";
+            divform1.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-1 checkbox");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('type',"checkbox");
+            inputobj.setAttribute('name',"endswith");
+            divcol.appendChild(inputobj);
+            divform1.appendChild(divcol);
+
+
+            var divform2 = document.createElement("div");
+            divform2.setAttribute('class',"form-group");
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-2 control-label");
+            labelobj.innerText="depth";
+            divform2.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-4");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('class',"form-control");
+            inputobj.setAttribute('name',"depth");
+            inputobj.setAttribute('oninput',"value=value.replace(/[^\\d]/g,'')");
+            inputobj.setAttribute('placeholder',"请输入数字");
+            divcol.appendChild(inputobj);
+            divform2.appendChild(divcol);
+
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-2 control-label");
+            labelobj.innerText="offset";
+            divform2.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-4");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('class',"form-control");
+            inputobj.setAttribute('name',"offset");
+            inputobj.setAttribute('oninput',"value=value.replace(/[^\\d]/g,'')");
+            inputobj.setAttribute('placeholder',"请输入数字");
+            divcol.appendChild(inputobj);
+            divform2.appendChild(divcol);
+
+            var divform3 = document.createElement("div");
+            divform3.setAttribute('class',"form-group");
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-2 control-label");
+            labelobj.innerText="distance";
+            divform3.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-4");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('class',"form-control");
+            inputobj.setAttribute('name',"distance");
+            inputobj.setAttribute('oninput',"value=value.replace(/[^\\d]/g,'')");
+            inputobj.setAttribute('placeholder',"请输入数字");
+            divcol.appendChild(inputobj);
+            divform3.appendChild(divcol);
+
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-2 control-label");
+            labelobj.innerText="within";
+            divform3.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-4");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('class',"form-control");
+            inputobj.setAttribute('name',"within");
+            inputobj.setAttribute('oninput',"value=value.replace(/[^\\d]/g,'')");
+            inputobj.setAttribute('placeholder',"请输入数字");
+            divcol.appendChild(inputobj);
+            divform3.appendChild(divcol);
+
+            var divform4 = document.createElement("div");
+            divform4.setAttribute('class',"form-group");
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-2 control-label");
+            labelobj.innerText="isdataat";
+            divform4.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-3");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('class',"form-control");
+            inputobj.setAttribute('name',"isdataat");
+            inputobj.setAttribute('oninput',"value=value.replace(/[^\\d]/g,'')");
+            inputobj.setAttribute('placeholder',"请输入数字");
+            divcol.appendChild(inputobj);
+            divform4.appendChild(divcol);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-1 checkbox");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('type',"checkbox");
+            inputobj.setAttribute('name',"relative");
+            divcol.appendChild(inputobj);
+            divcol.appendChild(document.createTextNode("relative"));
+            divform4.appendChild(divcol);
+
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-2 control-label");
+            labelobj.innerText="bsize";
+            divform4.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-4");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('class',"form-control");
+            inputobj.setAttribute('name',"bsize");
+            inputobj.setAttribute('oninput',"value=value.replace(/[^\\d]/g,'')");
+            inputobj.setAttribute('placeholder',"请输入数字");
+            divcol.appendChild(inputobj);
+            divform4.appendChild(divcol);
+
+            var divform5 = document.createElement("div");
+            divform5.setAttribute('class',"form-group");
+            labelobj=document.createElement("label");
+            labelobj.setAttribute('class',"col-sm-2 control-label");
+            labelobj.innerText="pcre";
+            divform5.appendChild(labelobj);
+            divcol=document.createElement("div");
+            divcol.setAttribute('class',"col-sm-4");
+            inputobj=document.createElement("input");
+            inputobj.setAttribute('class',"form-control");
+            inputobj.setAttribute('name',"pcre");
+            divcol.appendChild(inputobj);
+            divform5.appendChild(divcol);
+
+
+            //tdobj0.appendChild(divform0);
+            tdobj0.appendChild(divform1);
+            tdobj0.appendChild(divform2);
+            tdobj0.appendChild(divform3);
+            tdobj0.appendChild(divform4);
+            tdobj0.appendChild(divform5);
+
+
+            //-------------------------
+            var tdobj1=document.createElement("td");
+            tdobj1.setAttribute('width',"10%");
+            var buttonobj=document.createElement("a");
+            buttonobj.setAttribute('onclick',"delR(this)");
+            buttonobj.innerText="删除";
+            tdobj1.appendChild(buttonobj);
+
+            trobj.appendChild(tdobj0);
+            trobj.appendChild(tdobj1);
+
+            tbody.appendChild(trobj);
+            //return selectobj;
+        }
+
+    </script>
+    <script>
+
+        function getContentstr(){
+            var contentstr="";
+            var clen = $("input[name='content']").length;
+            for(var i=0;i < clen ;i++){
+		        var content_i=$("input[name='content']").eq(i).val();
+
+		        if (content_i!=""){
+		            var cstr="";
+		            cstr=" content:\""+content_i+"\";"
+
+		            var nocase_i=$("input[name='nocase']").eq(i).is(":checked");
+		            if (nocase_i){cstr=cstr+" nocase;"}
+
+                    var depth_i = $("input[name='depth']").eq(i).val();
+		            if (depth_i!=""){cstr=cstr+" depth:"+depth_i+";";}
+
+                    var startswith_i=$("input[name='startswith']").eq(i).is(":checked");
+		            if (startswith_i){cstr=cstr+" startswith;"}
+
+                    var endswith_i=$("input[name='endswith']").eq(i).is(":checked");
+		            if (endswith_i){cstr=cstr+" endswith;"}
+
+		            var offset_i = $("input[name='offset']").eq(i).val();
+		            if (offset_i!=""){cstr=cstr+" offset:"+offset_i+";";}
+
+		            var distance_i = $("input[name='distance']").eq(i).val();
+		            if (distance_i!=""){cstr=cstr+" distance:"+distance_i+";";}
+
+		            var within_i = $("input[name='within']").eq(i).val();
+		            if (within_i!=""){cstr=cstr+" within:"+within_i+";";}
+
+		            var isdataat_i = $("input[name='isdataat']").eq(i).val();
+		            if (isdataat_i!=""){
+		                cstr=cstr+" isdataat:"+isdataat_i;
+                        var relative_i=$("input[name='relative']").eq(i).is(":checked");
+		                if (relative_i){cstr=cstr+", relative"}
+		                cstr=cstr+";";
+		            }
+
+		            var bsize_i = $("input[name='bsize']").eq(i).val();
+		            if (bsize_i!=""){cstr=cstr+" bsize:"+bsize_i+";";}
+
+                    var pcre_i = $("input[name='pcre']").eq(i).val();
+		            if (pcre_i!=""){cstr=cstr+" pcre:\""+pcre_i+"\";";}
+
+
+		            if (cstr!=""){
+		                contentstr=contentstr+cstr;
+                    }
+                }
+            }
+            //alert(contentstr);
+            return contentstr;
+        }
+
+    </script>
+    <script>
+        function createRule(){
+
+            var msg="";
+
+            var action=$('#action').val();
+            var proto=$('#protocol').val();
+            var protoc=""
+            if (proto=="else"){
+                protoc = $('#protocol_else').val();
+
+            }else{
+                protoc=proto;
+            }
+            if (protoc==""){
+                msg="请填写协议";
+            }
+
+            var src_ip = $('#src_ip').val();
+            if (msg==""){
+                if (src_ip==""){
+                    msg="请填写源地址";
+                }
+            }
+            var src_port = $('#src_port').val();
+            if (msg==""){
+                if (src_port==""){
+                    msg="请填写源端口";
+                }
+            }
+            var des_ip = $('#des_ip').val();
+            if (msg==""){
+                if (des_ip==""){
+                    msg="请填写目的地址";
+                }
+            }
+            var des_port = $('#des_port').val();
+            if (msg==""){
+                if (des_port==""){
+                    msg="请填写目的端口";
+                }
+            }
+            var msgstr = $('#msg').val();
+            if (msg==""){
+                if (msgstr==""){
+                    msg="请填写msg";
+                }
+            }
+            var sid = $('#sid').val();
+            if (msg==""){
+                if (sid==""){
+                    msg="请填写sid";
+                }
+            }
+            var rev = $('#rev').val();
+            if (msg==""){
+                if (rev==""){
+                    msg="请填写rev";
+                }
+            }
+
+            var direct = $("#direction").val();
+            var flow = $("#flow").val();
+            var content = $('#content').val();
+            var flowstr="";
+            if (flow!=""){
+                flowstr=" flow:"+flow+";"
+            }
+            var classtypestr="";
+            var classtype=$("#classtype").val();
+            if (classtype!=""){
+                classtypestr=" classtype:"+classtype+";"
+            }
+            var contentstr=getContentstr();;
+
+            if(msg==""){
+                var rule=action + " "+ protoc + " "+src_ip +" "+src_port+" "+direct+" "+des_ip +" "+des_port;
+                var mstr="msg:\""+msgstr+"\";"+flowstr+contentstr+" sid:"+sid+";"+classtypestr+" rev:"+rev+";";
+                var rulestr = rule+" ("+mstr+")";
+                //alert(rulestr);
+                $("#rules").text(rulestr);
+
+
+
+            }else{
+                alert(msg);
+
+            }
+        }
+
+
+    </script>
+
+
+<!--<script>
+function quitTask(){
+	window.location.href="/xray/xraylist/";
+}
+</script>-->
+
+<script>
+        function delR(obj){
+            var tbody = document.getElementById('tbody_content');
+            tbody.removeChild(obj.parentNode.parentNode);
+        }
+
+</script>
+{% endblock %}

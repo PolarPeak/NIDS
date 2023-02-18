@@ -1,0 +1,40 @@
+<!-- Left side column. contains the sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+     
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+
+      <ul class="sidebar-menu" data-widget="tree">
+        {%ifequal flag_one "suricata"%}
+		<li class="treeview active">
+		{%else%}
+		<li class="treeview">
+		{%endifequal%}
+          <a href="suricata">
+            <i class="fa fa-list-ul"></i> <span>入侵检测系统</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+			  {%ifequal flag_two "rule"%}<li class="active">{%else%}<li>{%endifequal%}<a href="/suricata/rule/"><i class="fa fa-circle-o"></i> 规则生成 </a></li>
+			  <!-- {%ifequal flag_two "monitor"%}<li class="active">{%else%}<li>{%endifequal%}<a href="/suricata/monitor/"><i class="fa fa-circle-o"></i>监控配置</a></li>
+               -->
+              {%ifequal flag_two "logs"%}<li class="active">{%else%}<li>{%endifequal%}<a href="/suricata/logs/"><i class="fa fa-circle-o"></i>安全日志</a></li>
+              {%ifequal flag_two "threat"%}<li class="active">{%else%}<li>{%endifequal%}<a href="/suricata/threat/"><i class="fa fa-circle-o"></i>威胁情报</a></li>
+		  </ul>
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>

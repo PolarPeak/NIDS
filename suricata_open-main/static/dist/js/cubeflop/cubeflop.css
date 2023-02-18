@@ -1,0 +1,41 @@
+.cube {
+    width: 100%;
+    height: 100%;
+    font-family: "led";
+    margin-right: 10px;
+    border-radius: 2px;
+    background: #1e569921;
+}
+.cube .number {
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    transform: translateY(0px);
+}
+.cube .number span.value {
+    font-size: 40px;
+    color: #3d9cff;
+}
+.cube.isMark {
+    width: 20px;
+    flex: none;
+    margin: 0;
+    margin-left: -10px;
+    border: 0;
+    background: transparent;
+}
+.cube.isMark .number {
+    align-items: flex-end;
+}
+.prefix {
+    flex: none;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    margin-right: 10px;
+    color: #3d9cff;
+}

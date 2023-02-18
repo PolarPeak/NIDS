@@ -1,0 +1,227 @@
+{%extends "base.html"%}
+
+{% block headercss %}
+
+<style>
+
+    td{word-break:break-all;}
+    </style>
+
+
+{% endblock %}
+
+{% block contentWrapper%}
+
+<div class="content-wrapper">
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+
+
+            <div class="box-header">
+              <h3 style="float:left" class="box-title">攻击详情</h3>
+            </div>
+            <div class="box-body">
+
+                <table id="suricata_list_table" class="table table-bordered table-hover">
+
+                    <tr>
+                      <th style="white-space:nowrap">时间</th>
+                      <td>{{data.time}}</td>
+                    </tr>
+                    <tr>
+                      <th style="white-space:nowrap">漏洞名</th>
+                      <td>{{data.vul}}</td>
+                    </tr>
+                    
+                      
+                    <tr>
+                      <th style="white-space:nowrap">安全等级</th>
+                      <td class="text-danger">{{data.level}}</td>
+                    </tr>
+                    <tr>
+                      <th style="white-space:nowrap">攻击源IP</th>
+                      <td>{{data.src_hostname}}</td>
+                    </tr>
+                    <tr>
+                      <th style="white-space:nowrap">攻击源端口</th>
+                      <td>{{data.src_port}}</td>
+                    </tr> 
+                    <tr>
+                      <!-- <th style="white-space:nowrap">被攻击IP</th>
+                      <td>{{data.server_ip}}</td>
+                    </tr>
+                    <tr>
+                      <th style="white-space:nowrap">被攻击端口</th>
+                      <td>{{data.service_port}}</td>
+                    </tr> -->
+                    
+                    {% if data.protocol != None %}
+                      <tr>
+                        <th style="white-space:nowrap">协议</th>
+                        <td>{{data.protocol}}</td>
+                      </tr>
+                      
+                    {% endif %}
+
+                    {% if data.http_method != None %}
+                      <tr>
+                        <th style="white-space:nowrap">请求方式</th>
+                        <td>{{data.http_method}}</td>
+                      </tr>
+                      
+                    {% endif %}
+                    
+                    {% if data.url != None %}
+                      <tr>
+                        <th style="white-space:nowrap">URL</th>
+                        <td>{{data.url}}</td>
+                      </tr>
+                    {% endif %}
+                    
+                    {% if data.status != None %}
+                      <tr>
+                        <th style="white-space:nowrap">状态码</th>
+                        <td>{{data.status}}</td>
+                      </tr>
+                    {% endif %}
+                    
+                    {% if data.ip != None %}
+                      <tr>
+                        <th style="white-space:nowrap">被攻击IP</th>
+                        <td>{{data.ip}}</td>
+                      </tr>
+                    {% else %}
+                      <tr>
+                        <th style="white-space:nowrap">被攻击IP</th>
+                        <td>{{data.server_ip_port}}</td>
+                      </tr>
+                    
+                    {% endif %}
+                    
+                    {% if data.http_user_agent != None %}
+                      <tr>
+                        <th style="white-space:nowrap">User Agent</th>
+                        <td>{{data.http_user_agent}}</td>
+                      </tr> 
+                    {% endif %}
+
+                    {% if data.payload != None %}
+                    <tr>
+                      <th style="white-space:nowrap">Payload</th>
+                      <td>{{data.payload}}</td>
+                    </tr>
+                  {% endif %}
+                  
+                  {% if data.http_refer != None %}
+                  <tr>
+                    <th style="white-space:nowrap">请求来源</th>
+                    <td>{{data.http_refer}}</td>
+                  </tr>
+                  {% endif %}
+
+                  
+                  {% if data.http_request_body != None %}
+                    <tr>
+                      <th style="white-space:nowrap">请求包</th>
+                      <td>{{data.http_request_body}}</td>
+                    </tr>
+                  {% endif %}
+
+                  {% if data.http_response_body != None %}
+                    <tr>
+                      <th style="white-space:nowrap">响应包</th>
+                      <td>{{data.http_response_body}}</td>
+                    </tr>
+                  {% endif %}
+
+                    
+
+              </table>
+            </div>
+
+
+
+
+
+
+
+            <!-- /.box -->
+          </div>
+		</div>
+
+	</div> <!-- /.row-->
+
+
+
+
+
+	</section>
+</div>
+{% endblock %}
+{% block bodyjs %}
+
+<script src="/static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="/static/bower_components/datatables.net-bs/js/dataTables.buttons.min.js"></script>
+    <script src="/static/bower_components/datatables.net-bs/js/jszip.min.js"></script>
+    <script src="/static/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
+
+    <script src="/static/bower_components/moment/min/moment.min.js"></script>
+    <script src="/static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<script>
+
+function mFunc(){
+    var datatable = $("#xray_list_table").DataTable();
+    if (datatable) {
+        datatable.clear();    //清空数据
+        datatable.destroy();         //销毁datatable
+    }
+    tabledata();
+    //table.ajax.reload();
+}
+
+  $(function () {
+
+    $('#example').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+	$('#suricata_list_table').DataTable({
+		"pageLength": 25,
+		'autoWidth'   : true
+	})
+  })
+
+
+</script>
+<!-- <script>
+    function delSuri(r_id){
+	if(window.confirm('确定删除？')){
+		$.ajax({
+			type: "GET",
+
+			url:"/suricata/delmor/"+r_id+'/',
+				success:function (result) {
+					if (result.code == 0) {
+						alert('删除成功');
+						window.location.href="/suricata/morlist/";
+					}else{
+						alert('异常，请检查');
+					};
+
+				},
+				error:function(){
+					alert("异常");
+				}
+		});
+	}
+}
+</script> -->
+{% endblock %}

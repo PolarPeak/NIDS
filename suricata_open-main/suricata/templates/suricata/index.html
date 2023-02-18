@@ -1,0 +1,3647 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../../../static/dist/images/windows-icon@2x.ico" />
+
+    <title>安全态势感知</title>
+
+    <!-- 轮播swiper插件样式 -->
+    <link rel="stylesheet" href="../../../static/dist/js/swiper/swiper.min.css" />
+    <!-- 翻牌器 -->
+    <link rel="stylesheet" href="../../../static/dist/js/cubeflop/cubeflop.css" />
+
+    <!-- 补间动画包 -->
+    <link rel="stylesheet" href="../../../static/dist/css/custom-animation.css" />
+
+    <!-- 重置样式 -->
+    <link rel="stylesheet" href="../../../static/dist/css/reset.css" />
+
+    <!-- 当前页面样式文件 -->
+    <link rel="stylesheet" href="../../../static/dist/sytle.css" />
+
+    <!-- jquery -->
+    <script src="../../../static/dist/js/jquery.min.js"></script>
+    <!-- echarts -->
+    <script src="../../../static/dist/js/echarts/echarts.min.js"></script>
+    <!-- echarts 水球图 -->
+    <script src="../../../static/dist/js/echarts/echarts-liquidfill.min.js"></script>
+    <!-- echarts 词云 -->
+    <script src="../../../static/dist/js/echarts/echarts-wordcloud.min.js"></script>
+    <!-- javascript工具库 -->
+    <script src="../../../static/dist/js/lodash.min.js"></script>
+    <!-- 二维码插件 -->
+    <script src="../../../static/dist/js/qrcode.min.js"></script>
+    <!-- 轮播插件 -->
+    <script src="../../../static/dist/js/swiper/swiper.min.js"></script>
+    <!-- 表格滚动插件 -->
+    <script src="../../../static/dist/js/seamscroll.min.js"></script>
+    <!-- day 日期插件 -->
+    <script src="../../../static/dist/js/dayjs/dayjs.min.js"></script>
+    <script src="../../../static/dist/js/dayjs/zh-cn.js"></script>
+    <!-- 工具类 -->
+    <script src="../../../static/dist/js/utils.js"></script>
+    <!-- 滚动数字所需要的插件 -->
+    <script src="../../../static/dist/js/jquery.countTo.js"></script>
+    <!-- 翻牌器 -->
+    <script src="../../../static/dist/js/cubeflop/cubeflop.js"></script>
+
+    <!-- 感谢使用微兔可视化，目前处于内测阶段，存在很多的不足开发人员在不断完善中，请谅解~ -->
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- 组件e4ab18ad-aa81-4dc4-a950-1795c9f2a56b开始-->
+
+      <div id="iteme4ab18ad-aa81-4dc4-a950-1795c9f2a56b">
+        <img
+          src="../../../static/dist/images/ea1ba956-578a-47df-8e92-115458be822b.png"
+          alt=""
+        />
+      </div>
+      <style>
+        #iteme4ab18ad-aa81-4dc4-a950-1795c9f2a56b {
+          width: 104px;
+          height: 98px;
+        }
+        #iteme4ab18ad-aa81-4dc4-a950-1795c9f2a56b img {
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+      <!-- 组件e4ab18ad-aa81-4dc4-a950-1795c9f2a56b结束-->
+
+      <!-- 组件36ba1a00-3af4-11ec-8c38-11d05a58a945开始-->
+
+      <div id="item36ba1a00-3af4-11ec-8c38-11d05a58a945"></div>
+
+      <script type="text/javascript">
+        $(function () {
+          // 基于准备好的dom，初始化echarts实例
+          const myChart = echarts.init(
+            document.getElementById("item36ba1a00-3af4-11ec-8c38-11d05a58a945")
+          )
+          // 指定图表的配置项
+          let option = {
+            legend: {
+              show: true,
+              top: "top",
+              left: "right",
+              orient: "horizontal",
+              itemWidth: 13,
+              itemHeight: 2,
+              itemGap: 10,
+              icon: "rect",
+              textStyle: { color: "#ffffff", fontSize: 12, lineHeight: 16 },
+            },
+            radar: {
+              indicator: [],
+              splitNumber: 5,
+              shape: "polygon",
+              axisLine: {
+                lineStyle: {
+                  width: 1,
+                  type: "dashed",
+                  color: "rgba(61, 156, 255, 0.05)",
+                },
+              },
+              splitLine: {
+                lineStyle: { width: 1, color: "rgba(241, 248, 255, 0.1)" },
+              },
+              name: { color: "#ffffff", fontSize: 12 },
+              radius: "60%",
+            },
+            color: ["rgba(67, 232, 243, 1)", "rgba(61, 156, 255, 1)"],
+            series: [],
+          }
+          let seriesStyle = {
+            label: {
+              show: false,
+              position: "inside",
+              color: "#ffffff",
+              fontSize: 12,
+            },
+            symbol: "circle",
+            symbolSize: 5,
+            symbolOffset: [0, 0],
+            itemStyle: {
+              borderColor: "transparent",
+              borderWidth: 0,
+              borderType: "——————",
+              borderRadius: 0,
+              shadowBlur: 0,
+              shadowColor: "transparent",
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              opacity: 0.94,
+            },
+            areaStyle: { opacity: 0.3 },
+            lineStyle: { width: 2 },
+          }
+
+          // 指定图表的数据
+          let data = [
+            {
+              indicator: [
+                { name: "安全漏洞", max: 3000 },
+                { name: "网络安全", max: 3000 },
+                { name: "威胁情报", max: 3000 },
+                { name: "主机安全", max: 3000 },
+                { name: "协议安全", max: 3000 },
+                { name: "办公安全", max: 3000 },
+              ],
+              data: [
+                {
+                  安全漏洞: 1500,
+                  网络安全: 1500,
+                  威胁情报: 2800,
+                  主机安全: 1500,
+                  协议安全: 1500,
+                  办公安全: 2800,
+                  name: "系列一",
+                },
+                {
+                  安全漏洞: 2800,
+                  网络安全: 2200,
+                  威胁情报: 2000,
+                  主机安全: 2800,
+                  协议安全: 2400,
+                  办公安全: 2200,
+                  name: "系列二",
+                },
+              ],
+            },
+          ]
+
+          //数据处理 开始
+          let series = []
+          let { data: dataSeries, indicator } = data[0]
+          let seriesData = []
+          dataSeries.forEach((item) => {
+            let value = []
+            indicator.forEach((oitem) => {
+              let element = oitem.name
+              value.push(item[element])
+            })
+            seriesData.push({
+              value: value,
+              name: item.name,
+            })
+          })
+          series.push({
+            type: "radar",
+            data: seriesData,
+            ...seriesStyle,
+          })
+          // 数据处理完
+          option.series = series
+          option.radar.indicator = indicator
+          option.grid = {
+            left: 15,
+            right: 15,
+            top: 10,
+            bottom: 10,
+            containLabel: true,
+          }
+          // 使用刚指定的配置项和数据显示图表。
+          myChart.setOption(option)
+        })
+      </script>
+
+      <!-- 组件36ba1a00-3af4-11ec-8c38-11d05a58a945结束-->
+
+      <!-- 分组68c51f01-0127-4a85-a924-36763a16f54a开始-->
+      <div id="item68c51f01-0127-4a85-a924-36763a16f54a">
+        <!-- 组件3b3d6372-5cda-4142-86f2-761bfc29e690开始-->
+
+        <div id="item3b3d6372-5cda-4142-86f2-761bfc29e690">
+          <img
+            src="../../../static/dist/images/679290f5-5472-4bad-92a7-726f9a93b3b8.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item3b3d6372-5cda-4142-86f2-761bfc29e690 {
+            width: 10.128717811158799px;
+            height: 12.74px;
+          }
+          #item3b3d6372-5cda-4142-86f2-761bfc29e690 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件3b3d6372-5cda-4142-86f2-761bfc29e690结束-->
+
+        <!-- 组件43b99c86-0d1a-40e8-a1cf-a1dd8cc1a452开始-->
+
+        <div id="item43b99c86-0d1a-40e8-a1cf-a1dd8cc1a452">
+          <img
+            src="../../../static/dist/images/0c0679cb-f16f-4bf6-9fe1-99200daab1af.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item43b99c86-0d1a-40e8-a1cf-a1dd8cc1a452 {
+            width: 11.751328326180257px;
+            height: 14px;
+          }
+          #item43b99c86-0d1a-40e8-a1cf-a1dd8cc1a452 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件43b99c86-0d1a-40e8-a1cf-a1dd8cc1a452结束-->
+
+        <!-- 组件fda4d001-d68f-49a0-b5fe-abbef51a06fb开始-->
+
+        <div id="itemfda4d001-d68f-49a0-b5fe-abbef51a06fb">
+          <h3>威胁场景分析</h3>
+        </div>
+
+        <style>
+          #itemfda4d001-d68f-49a0-b5fe-abbef51a06fb {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+          }
+        </style>
+
+        <!-- 组件fda4d001-d68f-49a0-b5fe-abbef51a06fb结束-->
+
+        <!-- 组件8a027f70-4c96-41cd-ab84-9e70077cea32开始-->
+
+        <div id="item8a027f70-4c96-41cd-ab84-9e70077cea32">
+          <img
+            src="../../../static/dist/images/711ba3b6-a28c-4b08-9871-0bf9424fa8b3.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item8a027f70-4c96-41cd-ab84-9e70077cea32 {
+            width: 469.65px;
+            height: 48px;
+          }
+          #item8a027f70-4c96-41cd-ab84-9e70077cea32 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件8a027f70-4c96-41cd-ab84-9e70077cea32结束-->
+      </div>
+      <!-- 分组68c51f01-0127-4a85-a924-36763a16f54a结束-->
+
+      <!-- 组件5e039b50-51c3-11ec-b192-79b15c0ea0bc开始-->
+
+      <div id="item5e039b50-51c3-11ec-b192-79b15c0ea0bc"></div>
+
+      <script type="text/javascript">
+        $(function () {
+          // 基于准备好的dom，初始化echarts实例
+          const myChart = echarts.init(
+            document.getElementById("item5e039b50-51c3-11ec-b192-79b15c0ea0bc")
+          )
+          // 指定图表的配置项
+          let option = {
+            title: {
+              text: "",
+              show: false,
+              link: "http://weitu.yunzhisec.com",
+              target: "blank",
+              textStyle: {
+                color: "#fff",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: 14,
+                lineHeight: 30,
+                textBorderColor: "",
+                textBorderWidth: 1,
+                textBorderType: "solid",
+                textBorderDashOffset: 1,
+                textShadowColor: "transparent",
+                textShadowBlur: 1,
+                textShadowOffsetX: 1,
+                textShadowOffsetY: 1,
+                overflow: "none",
+              },
+              padding: 1,
+              itemGap: 10,
+              z: 10,
+              left: "auto",
+              top: "auto",
+              right: "auto",
+              bottom: "auto",
+              backgroundColor: "transparent",
+              borderColor: "",
+              borderWidth: "",
+              borderRadius: 1,
+              shadowBlur: 0,
+              shadowColor: "",
+              shadowOffsetX: "",
+              shadowOffsetY: "",
+              subtext: "",
+              sublink: "",
+              subtarget: "blank",
+              subtextStyle: {
+                color: "#ffffff",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: 12,
+                lineHeight: 0,
+                textBorderColor: "",
+                textBorderWidth: 0,
+                textBorderType: "solid",
+                textBorderDashOffset: 0,
+                textShadowColor: "transparent",
+                textShadowBlur: 0,
+                textShadowOffsetX: 0,
+                textShadowOffsetY: 0,
+                overflow: "none",
+              },
+            },
+            color: [
+              "rgba(211,46,48,1)",
+              "rgba(255,167,38,1)",
+              "rgba(2,170,244,1)",
+            ],
+            tooltip: { trigger: "item" },
+            series: [
+              {
+                itemStyle: {
+                  borderWidth: 0,
+                  borderColor: "#FFE768",
+                  shadowColor: "#FFE768",
+                  borderRadius: 0,
+                  shadowBlur: 0,
+                  shadowOffsetX: 0,
+                  shadowOffsetY: 0,
+                },
+                label: {
+                  show: true,
+                  position: "outside",
+                  formatter: null,
+                  fontSize: 14,
+                  lineHeight: 22,
+                  color: "#ffffff",
+                },
+                labelLine: {
+                  length: 15,
+                  length2: 15,
+                  show: true,
+                  color: "#00ffff",
+                  lineStyle: { width: 1, type: "solid" },
+                },
+                radius: ["48%", "60%"],
+                type: "pie",
+              },
+            ],
+          }
+          option.series[0].label.formatter = (params) => {
+            return parseInt(params.percent) + "%" + "\n" + params.name
+          }
+          // 指定图表的数据
+          let data = [
+            { value: 6, name: "高危" },
+            { value: 6, name: "中危" },
+            { value: 100, name: "低危" },
+          ]
+
+          //映射
+          data = data.map((item) => {
+            return { value: item["value"], name: item["name"] }
+          })
+          option.series[0].data = data
+          // 使用刚指定的配置项和数据显示图表。
+          myChart.setOption(option)
+        })
+      </script>
+
+      <!-- 组件5e039b50-51c3-11ec-b192-79b15c0ea0bc结束-->
+
+      <!-- 分组0ff1fba0-3af8-11ec-8c38-11d05a58a945开始-->
+      <div id="item0ff1fba0-3af8-11ec-8c38-11d05a58a945">
+        <!-- 组件96b47580-3e1f-11ec-bded-aff6d68246d7开始-->
+
+        <div id="item96b47580-3e1f-11ec-bded-aff6d68246d7">
+          <span class="countto"></span>
+          <span class="suffix"> </span>
+        </div>
+
+        <style>
+          #item96b47580-3e1f-11ec-bded-aff6d68246d7 {
+            width: 95.56px;
+            height: 50px;
+            text-align: center;
+          }
+          #item96b47580-3e1f-11ec-bded-aff6d68246d7 .countto {
+            font-size: 30px;
+            color: rgba(41, 182, 212, 1);
+
+            line-height: 50px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            font-style: normal;
+          }
+          #item96b47580-3e1f-11ec-bded-aff6d68246d7 .suffix {
+            color: rgba(221, 221, 221, 1);
+            font-size: 16px;
+          }
+        </style>
+        <!-- 组件96b47580-3e1f-11ec-bded-aff6d68246d7结束-->
+
+        <!-- 组件83c53310-3e1f-11ec-bded-aff6d68246d7开始-->
+
+        <div id="item83c53310-3e1f-11ec-bded-aff6d68246d7">
+          <span class="countto"></span>
+          <span class="suffix"> </span>
+        </div>
+
+        <style>
+          #item83c53310-3e1f-11ec-bded-aff6d68246d7 {
+            width: 95.56px;
+            height: 50px;
+            text-align: center;
+          }
+          #item83c53310-3e1f-11ec-bded-aff6d68246d7 .countto {
+            font-size: 30px;
+            color: rgba(14, 204, 135, 1);
+
+            line-height: 50px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            font-style: normal;
+          }
+          #item83c53310-3e1f-11ec-bded-aff6d68246d7 .suffix {
+            color: rgba(221, 221, 221, 1);
+            font-size: 16px;
+          }
+        </style>
+        <!-- 组件83c53310-3e1f-11ec-bded-aff6d68246d7结束-->
+
+        <!-- 组件e50442c8-50f2-42ef-accf-b6b46e736ac2开始-->
+
+        <div id="iteme50442c8-50f2-42ef-accf-b6b46e736ac2">
+          <p class="">异常</p>
+        </div>
+
+        <style>
+          #iteme50442c8-50f2-42ef-accf-b6b46e736ac2 {
+            line-height: 1.5;
+            font-size: 22px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #iteme50442c8-50f2-42ef-accf-b6b46e736ac2 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件e50442c8-50f2-42ef-accf-b6b46e736ac2结束-->
+
+        <!-- 组件24726a1e-0968-4072-833e-bbcf71d32cc2开始-->
+
+        <div id="item24726a1e-0968-4072-833e-bbcf71d32cc2">
+          <p class="">一般</p>
+        </div>
+
+        <style>
+          #item24726a1e-0968-4072-833e-bbcf71d32cc2 {
+            line-height: 1.5;
+            font-size: 22px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #item24726a1e-0968-4072-833e-bbcf71d32cc2 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件24726a1e-0968-4072-833e-bbcf71d32cc2结束-->
+
+        <!-- 组件4d14cc90-3af5-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item4d14cc90-3af5-11ec-8c38-11d05a58a945">
+          <p class="">正常</p>
+        </div>
+
+        <style>
+          #item4d14cc90-3af5-11ec-8c38-11d05a58a945 {
+            line-height: 1.5;
+            font-size: 22px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #item4d14cc90-3af5-11ec-8c38-11d05a58a945 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件4d14cc90-3af5-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件53e99cd0-3e1f-11ec-bded-aff6d68246d7开始-->
+
+        <div id="item53e99cd0-3e1f-11ec-bded-aff6d68246d7">
+          <span class="countto"></span>
+          <span class="suffix"> </span>
+        </div>
+
+        <style>
+          #item53e99cd0-3e1f-11ec-bded-aff6d68246d7 {
+            width: 95.56px;
+            height: 50px;
+            text-align: center;
+          }
+          #item53e99cd0-3e1f-11ec-bded-aff6d68246d7 .countto {
+            font-size: 30px;
+            color: rgba(41, 182, 212, 1);
+
+            line-height: 50px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            font-style: normal;
+          }
+          #item53e99cd0-3e1f-11ec-bded-aff6d68246d7 .suffix {
+            color: rgba(221, 221, 221, 1);
+            font-size: 16px;
+          }
+        </style>
+        <!-- 组件53e99cd0-3e1f-11ec-bded-aff6d68246d7结束-->
+
+        <!-- 分组9f23d680-3af4-11ec-8c38-11d05a58a945开始-->
+        <div id="item9f23d680-3af4-11ec-8c38-11d05a58a945">
+          <!-- 组件f6b081a9-2198-4570-a889-0f35ad468fc5开始-->
+
+          <div id="itemf6b081a9-2198-4570-a889-0f35ad468fc5">
+            <img
+              src="../../../static/dist/images/2c4512b0-4c7a-48a1-9c19-8c3c9ed1d421.png"
+              alt=""
+            />
+          </div>
+          <style>
+            #itemf6b081a9-2198-4570-a889-0f35ad468fc5 {
+              width: 135px;
+              height: 118px;
+            }
+            #itemf6b081a9-2198-4570-a889-0f35ad468fc5 img {
+              width: 100%;
+              height: 100%;
+            }
+          </style>
+          <!-- 组件f6b081a9-2198-4570-a889-0f35ad468fc5结束-->
+
+          <!-- 组件48b20346-250b-4db3-9fcc-df3d52eef437开始-->
+
+          <div id="item48b20346-250b-4db3-9fcc-df3d52eef437">
+            <img
+              src="../../../static/dist/images/e1990c00-55dd-490d-91c0-e4e57bc5b821.png"
+              alt=""
+            />
+          </div>
+          <style>
+            #item48b20346-250b-4db3-9fcc-df3d52eef437 {
+              width: 135px;
+              height: 118px;
+            }
+            #item48b20346-250b-4db3-9fcc-df3d52eef437 img {
+              width: 100%;
+              height: 100%;
+            }
+          </style>
+          <!-- 组件48b20346-250b-4db3-9fcc-df3d52eef437结束-->
+
+          <!-- 组件4fa60793-b187-47a9-9499-69dc2edff5ae开始-->
+
+          <div id="item4fa60793-b187-47a9-9499-69dc2edff5ae">
+            <img
+              src="../../../static/dist/images/c980e723-0204-4197-a849-1c529fc79f58.png"
+              alt=""
+            />
+          </div>
+          <style>
+            #item4fa60793-b187-47a9-9499-69dc2edff5ae {
+              width: 135px;
+              height: 118px;
+            }
+            #item4fa60793-b187-47a9-9499-69dc2edff5ae img {
+              width: 100%;
+              height: 100%;
+            }
+          </style>
+          <!-- 组件4fa60793-b187-47a9-9499-69dc2edff5ae结束-->
+        </div>
+        <!-- 分组9f23d680-3af4-11ec-8c38-11d05a58a945结束-->
+      </div>
+      <!-- 分组0ff1fba0-3af8-11ec-8c38-11d05a58a945结束-->
+
+      <!-- 分组a932ea30-3bad-11ec-91b7-e1d81e5f22aa开始-->
+      <div id="itema932ea30-3bad-11ec-91b7-e1d81e5f22aa">
+        <!-- 组件a932ea31-3bad-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="itema932ea31-3bad-11ec-91b7-e1d81e5f22aa">
+          <img
+            src="../../../static/dist/images/2c65977d-87d5-49f7-ba58-50857d160669.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itema932ea31-3bad-11ec-91b7-e1d81e5f22aa {
+            width: 10.128717811158799px;
+            height: 12.74px;
+          }
+          #itema932ea31-3bad-11ec-91b7-e1d81e5f22aa img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件a932ea31-3bad-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件a932ea32-3bad-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="itema932ea32-3bad-11ec-91b7-e1d81e5f22aa">
+          <img
+            src="../../../static/dist/images/e6bad78c-e61b-412a-b656-7954f97b2b5f.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itema932ea32-3bad-11ec-91b7-e1d81e5f22aa {
+            width: 11.751328326180257px;
+            height: 14px;
+          }
+          #itema932ea32-3bad-11ec-91b7-e1d81e5f22aa img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件a932ea32-3bad-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件a932ea33-3bad-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="itema932ea33-3bad-11ec-91b7-e1d81e5f22aa">
+          <h3>威胁情况</h3>
+        </div>
+
+        <style>
+          #itema932ea33-3bad-11ec-91b7-e1d81e5f22aa {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+          }
+        </style>
+
+        <!-- 组件a932ea33-3bad-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件a932ea34-3bad-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="itema932ea34-3bad-11ec-91b7-e1d81e5f22aa">
+          <img
+            src="../../../static/dist/images/f1bb4c6b-3f07-499e-823b-0cd2eff58a37.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itema932ea34-3bad-11ec-91b7-e1d81e5f22aa {
+            width: 469.65px;
+            height: 48px;
+          }
+          #itema932ea34-3bad-11ec-91b7-e1d81e5f22aa img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件a932ea34-3bad-11ec-91b7-e1d81e5f22aa结束-->
+      </div>
+      <!-- 分组a932ea30-3bad-11ec-91b7-e1d81e5f22aa结束-->
+
+      <!-- 组件01d6be30-3af2-11ec-8c38-11d05a58a945开始-->
+
+      <div id="item01d6be30-3af2-11ec-8c38-11d05a58a945"></div>
+
+      <script type="text/javascript">
+        $(function () {
+          // 基于准备好的dom，初始化echarts实例
+          const myChart = echarts.init(
+            document.getElementById("item01d6be30-3af2-11ec-8c38-11d05a58a945")
+          )
+          // 指定图表的配置项
+          let option = {
+            legend: {
+              show: false,
+              top: "top",
+              left: "center",
+              orient: "horizontal",
+              itemWidth: 8,
+              itemHeight: 8,
+              itemGap: 10,
+              icon: "rect",
+              textStyle: { color: "#ffffff", fontSize: 12, lineHeight: 14 },
+            },
+            xAxis: {
+              show: false,
+              axisLabel: {
+                show: false,
+                color: "#ffffff",
+                fontSize: 12,
+                margin: 8,
+                height: "14px",
+              },
+              axisLine: {
+                show: true,
+                lineStyle: { color: "#27292d", type: "solid", width: 1 },
+              },
+              axisTick: {
+                show: false,
+                lineStyle: { color: "#27292d", type: "solid", width: 1 },
+              },
+              splitLine: {
+                show: false,
+                lineStyle: { color: "#27292d", type: "dashed", width: 1 },
+              },
+              data: [],
+              type: "value",
+            },
+            yAxis: [
+              {
+                type: "category",
+                show: true,
+                inverse: true,
+                axisLabel: {
+                  show: true,
+                  color: "#ffffff",
+                  margin: 8,
+                  fontSize: 12,
+                  verticalAlign: "middle",
+                },
+                axisLine: {
+                  show: false,
+                  lineStyle: { color: "#27292d", type: "solid", width: 1 },
+                },
+                axisTick: {
+                  show: false,
+                  lineStyle: { color: "#27292d", type: "solid", width: 1 },
+                },
+                splitLine: {
+                  show: false,
+                  lineStyle: { color: "#27292d", type: "dashed", width: 1 },
+                },
+                data: [],
+              },
+              {
+                type: "category",
+                show: true,
+                inverse: true,
+                axisLabel: {
+                  show: true,
+                  margin: 20,
+                  color: "#ffffff",
+                  fontSize: 14,
+                },
+                axisLine: {
+                  show: false,
+                  lineStyle: { color: "#27292d", type: "solid", width: 1 },
+                },
+                axisTick: {
+                  show: false,
+                  lineStyle: { color: "#27292d", type: "solid", width: 1 },
+                },
+                splitLine: {
+                  show: false,
+                  lineStyle: { color: "#27292d", type: "dashed", width: 1 },
+                },
+                data: [],
+                position: "right",
+              },
+            ],
+            color: [
+              {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [
+                  { offset: 0, color: "rgba(57,158,254,1)" },
+                  { offset: 0.82, color: "rgba(6,246,240,1)" },
+                ],
+                global: false,
+              },
+              {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [
+                  { offset: 0, color: "rgba(57,158,254,1)" },
+                  { offset: 0.82, color: "rgba(6,246,240,1)" },
+                ],
+                global: false,
+              },
+              {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [
+                  { offset: 0, color: "rgba(57,158,254,1)" },
+                  { offset: 0.82, color: "rgba(6,246,240,1)" },
+                ],
+                global: false,
+              },
+              {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [
+                  { offset: 0, color: "rgba(102,187,106,1)" },
+                  { offset: 0.485, color: "rgba(255,193,6,1)" },
+                ],
+                global: false,
+              },
+            ],
+            series: [
+              {
+                type: "pictorialBar",
+                data: [],
+                z: 2,
+                silent: true,
+                useSeriesStyle: false,
+                itemStyle: { borderRadius: 0, color: "#050b16" },
+                xAxisIndex: 0,
+                symbol: "rect",
+                opacity: 1,
+                symbolSize: [3, 10],
+                symbolRepeat: "fixed",
+                symbolMargin: 4,
+                label: { show: false },
+              },
+            ],
+          }
+          let seriesStyle = {
+            showBackground: true,
+            backgroundStyle: { color: "#050b16", opacity: 1 },
+            itemStyle: {
+              shadowBlur: 0,
+              shadowColor: "#5c1717",
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              borderRadius: 0,
+              borderColor: "#292929",
+              borderWidth: 0,
+              borderType: "dotted",
+            },
+            label: {
+              show: false,
+              position: "right",
+              color: "#fff",
+              fontSize: 12,
+            },
+            barWidth: 10,
+            z: 1,
+          }
+
+          // 指定图表的数据
+          let data = [
+            { time: "kali     ", value: 1003, name: "系列二" },
+            { time: "pubian", value: 660, name: "系列二" },
+            { time: "ubuntu", value: 540, name: "系列二" },
+            { time: "centos ", value: 260, name: "系列二" },
+          ]
+
+          //数据处理 开始
+          let xKey = "value"
+          let yKey = "time"
+          let sKey = "name"
+          let dataSeries = deepCopy(option.series)
+          let seriesArr = []
+          let dataColumn = []
+          const colorList = option.color
+          data.forEach((item) => seriesArr.push(item[sKey]))
+          seriesArr = [...new Set(seriesArr)]
+          if (xKey && xKey) {
+            data.forEach((item) => dataColumn.push(item[yKey]))
+            dataColumn = [...new Set(dataColumn)]
+            seriesArr.forEach((item) => {
+              let data1 = []
+              data.forEach((oitem) => {
+                if (oitem[sKey] === item) {
+                  data1.push({
+                    name: oitem[yKey],
+                    value: oitem[xKey],
+                  })
+                }
+              })
+              dataSeries.unshift({
+                name: item,
+                data: data1,
+                type: "bar",
+              })
+            })
+          }
+          let seriesObj = dataSeries.map((item) => {
+            if (item.useSeriesStyle != false) {
+              return (item = _.merge(item, seriesStyle, {
+                itemStyle: {
+                  color: (params) => {
+                    if (params.dataIndex < 3) {
+                      return option.color[params.dataIndex]
+                    } else {
+                      return option.color[3]
+                    }
+                  },
+                },
+              }))
+            } else {
+              return (item = item)
+            }
+          })
+          let arr1 = [],
+            arr2 = []
+          seriesObj[0].data.sort((a, b) => {
+            return b.value - a.value
+          })
+          seriesObj[0].data.forEach((item) => {
+            arr1.push(item.name)
+            arr2.push(item.value)
+          })
+          option.yAxis[0].data = arr1
+          option.yAxis[1].data = arr2
+          option.yAxis[0].axisLabel.formatter = function (value, index) {
+            if (index < 3) {
+              return (
+                "{idx" + index + "|" + (1 + index) + "} {title|" + value + "}"
+              )
+            } else {
+              return "{idx|" + (1 + index) + "} {title|" + value + "}"
+            }
+          }
+          option.yAxis[0].axisLabel.margin = 14
+          option.yAxis[0].axisLabel.rich = {
+            idx0: {
+              align: "center",
+              padding: [2, 5],
+              color: "#22252C",
+              borderRadius: 50,
+              verticalAlign: "middle",
+              backgroundColor: "#5158fa",
+            },
+            idx1: {
+              align: "center",
+              padding: [2, 5],
+              color: "#22252C",
+              lineHeight: 310000,
+              borderRadius: 50,
+              verticalAlign: "middle",
+              backgroundColor: "#00ce9a",
+            },
+            idx2: {
+              padding: [2, 5],
+              color: "#22252C",
+              borderRadius: 50,
+              verticalAlign: "middle",
+              backgroundColor: "#21bbf9",
+            },
+            idx: {
+              color: "#fff",
+              padding: [2, 5],
+              verticalAlign: "middle",
+            },
+            title: {
+              padding: [5, 0, 1],
+              fontSize: option.yAxis[0].axisLabel.fontSize,
+            },
+          }
+          if (seriesObj.length) {
+            let dataArr = seriesObj[0].data
+            let copyArray = deepCopy(dataArr)
+            let maxNumber = copyArray[0].value
+            let arr = []
+            copyArray.forEach((item) => {
+              arr.push({
+                name: item.name,
+                value: item.value,
+              })
+            })
+            if (seriesObj.length) {
+              seriesObj[seriesObj.length - 1].data = arr
+            }
+          }
+          // 数据处理完
+          option.series = seriesObj
+          option.grid = {
+            left: 15,
+            right: 15,
+            top: 10,
+            bottom: 10,
+            containLabel: true,
+          }
+          // 使用刚指定的配置项和数据显示图表。
+          myChart.setOption(option)
+        })
+      </script>
+
+      <!-- 组件01d6be30-3af2-11ec-8c38-11d05a58a945结束-->
+
+      <!-- 分组239f40a7-57da-499e-9d22-f9d8960ec86b开始-->
+      <div id="item239f40a7-57da-499e-9d22-f9d8960ec86b">
+        <!-- 组件ff75cfb1-c887-466a-a9eb-a31db31eda40开始-->
+
+        <div id="itemff75cfb1-c887-466a-a9eb-a31db31eda40">
+          <img
+            src="../../../static/dist/images/fcd39439-797c-4057-870a-cefeda03bad1.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemff75cfb1-c887-466a-a9eb-a31db31eda40 {
+            width: 10.128717811158799px;
+            height: 12.74px;
+          }
+          #itemff75cfb1-c887-466a-a9eb-a31db31eda40 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件ff75cfb1-c887-466a-a9eb-a31db31eda40结束-->
+
+        <!-- 组件ee2933cc-af3f-4d8a-a3df-04ff4cdf869a开始-->
+
+        <div id="itemee2933cc-af3f-4d8a-a3df-04ff4cdf869a">
+          <img
+            src="../../../static/dist/images/2e12082e-5281-485e-b46d-39cdac21b639.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemee2933cc-af3f-4d8a-a3df-04ff4cdf869a {
+            width: 11.751328326180257px;
+            height: 14px;
+          }
+          #itemee2933cc-af3f-4d8a-a3df-04ff4cdf869a img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件ee2933cc-af3f-4d8a-a3df-04ff4cdf869a结束-->
+
+        <!-- 组件8fe2a24b-17b9-43b4-9c4f-56ba8bcde55d开始-->
+
+        <div id="item8fe2a24b-17b9-43b4-9c4f-56ba8bcde55d">
+          <h3>设备管理情况</h3>
+        </div>
+
+        <style>
+          #item8fe2a24b-17b9-43b4-9c4f-56ba8bcde55d {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+          }
+        </style>
+
+        <!-- 组件8fe2a24b-17b9-43b4-9c4f-56ba8bcde55d结束-->
+
+        <!-- 组件deb2a9e9-e6e4-4c75-8b9d-434788157a3f开始-->
+
+        <div id="itemdeb2a9e9-e6e4-4c75-8b9d-434788157a3f">
+          <img
+            src="../../../static/dist/images/54385723-9cfc-40a6-b345-c5847ce6a818.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemdeb2a9e9-e6e4-4c75-8b9d-434788157a3f {
+            width: 469.65px;
+            height: 48px;
+          }
+          #itemdeb2a9e9-e6e4-4c75-8b9d-434788157a3f img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件deb2a9e9-e6e4-4c75-8b9d-434788157a3f结束-->
+      </div>
+      <!-- 分组239f40a7-57da-499e-9d22-f9d8960ec86b结束-->
+
+      <!-- 分组1d35989b-82b1-4d45-9a21-814993473bcc开始-->
+      <div id="item1d35989b-82b1-4d45-9a21-814993473bcc">
+        <!-- 组件8389a620-3bad-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="item8389a620-3bad-11ec-91b7-e1d81e5f22aa">
+          <span class="countto"></span>
+          <span class="suffix"> 辆 </span>
+        </div>
+
+        <script type="text/javascript">
+          $(function () {
+            let data = [{ value: 534 }]
+
+            $("#item8389a620-3bad-11ec-91b7-e1d81e5f22aa .countto").countTo({
+              from: 0,
+              to: data[0].value,
+              speed: 3000,
+              decimals: 2,
+              formatter: (value, options) => {
+                return (
+                  "" +
+                  value
+                    .toFixed(options.decimals)
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                )
+              },
+            })
+          })
+        </script>
+
+        <style>
+          #item8389a620-3bad-11ec-91b7-e1d81e5f22aa {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #item8389a620-3bad-11ec-91b7-e1d81e5f22aa .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #item8389a620-3bad-11ec-91b7-e1d81e5f22aa .suffix {
+            color: rgba(0, 240, 255, 1);
+            font-size: 21px;
+          }
+        </style>
+        <!-- 组件8389a620-3bad-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件c87d6543-54ca-45df-885c-8028537e1f4c开始-->
+
+        <div id="itemc87d6543-54ca-45df-885c-8028537e1f4c">
+          <p class="">车辆</p>
+        </div>
+
+        <style>
+          #itemc87d6543-54ca-45df-885c-8028537e1f4c {
+            line-height: 1.5;
+            font-size: 20px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #itemc87d6543-54ca-45df-885c-8028537e1f4c .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件c87d6543-54ca-45df-885c-8028537e1f4c结束-->
+
+        <!-- 组件ef24168d-8c27-4aff-bcda-2b7e9b36b2d3开始-->
+
+        <div id="itemef24168d-8c27-4aff-bcda-2b7e9b36b2d3">
+          <img
+            src="../../../static/dist/images/2cf760e5-7087-498e-bbfa-b4b92f5b77a1.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemef24168d-8c27-4aff-bcda-2b7e9b36b2d3 {
+            width: 67px;
+            height: 67px;
+          }
+          #itemef24168d-8c27-4aff-bcda-2b7e9b36b2d3 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件ef24168d-8c27-4aff-bcda-2b7e9b36b2d3结束-->
+
+        <!-- 组件743a914b-bf88-497d-8d4a-c7404646b669开始-->
+
+        <div id="item743a914b-bf88-497d-8d4a-c7404646b669">
+          <img
+            src="../../../static/dist/images/3521d617-7ab4-42cd-8f35-bdb342e5d69d.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item743a914b-bf88-497d-8d4a-c7404646b669 {
+            width: 425px;
+            height: 111px;
+          }
+          #item743a914b-bf88-497d-8d4a-c7404646b669 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件743a914b-bf88-497d-8d4a-c7404646b669结束-->
+      </div>
+      <!-- 分组1d35989b-82b1-4d45-9a21-814993473bcc结束-->
+
+      <!-- 分组1724c166-8747-4372-9cff-a35169b00132开始-->
+      <div id="item1724c166-8747-4372-9cff-a35169b00132">
+        <!-- 组件7aa92850-3bad-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="item7aa92850-3bad-11ec-91b7-e1d81e5f22aa">
+          <span class="countto"></span>
+          <span class="suffix"> 个 </span>
+        </div>
+
+        <script type="text/javascript">
+          $(function () {
+            let data = [{ value: 2598 }]
+
+            $("#item7aa92850-3bad-11ec-91b7-e1d81e5f22aa .countto").countTo({
+              from: 0,
+              to: data[0].value,
+              speed: 3000,
+              decimals: 2,
+              formatter: (value, options) => {
+                return (
+                  "" +
+                  value
+                    .toFixed(options.decimals)
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                )
+              },
+            })
+          })
+        </script>
+
+        <style>
+          #item7aa92850-3bad-11ec-91b7-e1d81e5f22aa {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #item7aa92850-3bad-11ec-91b7-e1d81e5f22aa .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #item7aa92850-3bad-11ec-91b7-e1d81e5f22aa .suffix {
+            color: rgba(0, 240, 255, 1);
+            font-size: 22px;
+          }
+        </style>
+        <!-- 组件7aa92850-3bad-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件0a95619a-825c-4379-b0aa-b9146a20e18a开始-->
+
+        <div id="item0a95619a-825c-4379-b0aa-b9146a20e18a">
+          <p class="">监控数</p>
+        </div>
+
+        <style>
+          #item0a95619a-825c-4379-b0aa-b9146a20e18a {
+            line-height: 1.5;
+            font-size: 20px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #item0a95619a-825c-4379-b0aa-b9146a20e18a .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件0a95619a-825c-4379-b0aa-b9146a20e18a结束-->
+
+        <!-- 组件0e499242-6578-4e77-8658-1fb8c3a65323开始-->
+
+        <div id="item0e499242-6578-4e77-8658-1fb8c3a65323">
+          <img
+            src="../../../static/dist/images/c9635f69-cfb7-4118-9621-7766c0ba75c1.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item0e499242-6578-4e77-8658-1fb8c3a65323 {
+            width: 67px;
+            height: 67px;
+          }
+          #item0e499242-6578-4e77-8658-1fb8c3a65323 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件0e499242-6578-4e77-8658-1fb8c3a65323结束-->
+
+        <!-- 组件c25c995f-3de3-4d4a-877c-550501b3f880开始-->
+
+        <div id="itemc25c995f-3de3-4d4a-877c-550501b3f880">
+          <img
+            src="../../../static/dist/images/14abb0d8-6ebb-4bbd-b177-18fad272d079.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemc25c995f-3de3-4d4a-877c-550501b3f880 {
+            width: 425px;
+            height: 111px;
+          }
+          #itemc25c995f-3de3-4d4a-877c-550501b3f880 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件c25c995f-3de3-4d4a-877c-550501b3f880结束-->
+      </div>
+      <!-- 分组1724c166-8747-4372-9cff-a35169b00132结束-->
+
+      <!-- 分组d5716c20-e6ae-4914-8d93-e5bbb1eca317开始-->
+      <div id="itemd5716c20-e6ae-4914-8d93-e5bbb1eca317">
+        <!-- 组件744458e0-3bad-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="item744458e0-3bad-11ec-91b7-e1d81e5f22aa">
+          <span class="countto"></span>
+          <span class="suffix"> 次 </span>
+        </div>
+
+        <style>
+          #item744458e0-3bad-11ec-91b7-e1d81e5f22aa {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #item744458e0-3bad-11ec-91b7-e1d81e5f22aa .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #item744458e0-3bad-11ec-91b7-e1d81e5f22aa .suffix {
+            color: rgba(0, 240, 255, 1);
+            font-size: 22px;
+          }
+        </style>
+        <!-- 组件744458e0-3bad-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件71259b3a-8e98-4f3c-9875-67f4d1570420开始-->
+
+        <div id="item71259b3a-8e98-4f3c-9875-67f4d1570420">
+          <p class="">告警总数</p>
+        </div>
+
+        <style>
+          #item71259b3a-8e98-4f3c-9875-67f4d1570420 {
+            line-height: 1.5;
+            font-size: 20px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #item71259b3a-8e98-4f3c-9875-67f4d1570420 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件71259b3a-8e98-4f3c-9875-67f4d1570420结束-->
+
+        <!-- 组件9fea4eb9-4a4a-4070-88ad-3231e3b4a023开始-->
+
+        <div id="item9fea4eb9-4a4a-4070-88ad-3231e3b4a023">
+          <img
+            src="../../../static/dist/images/dbbcda0c-d0dc-4d16-9ce0-7420ef69a017.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item9fea4eb9-4a4a-4070-88ad-3231e3b4a023 {
+            width: 67px;
+            height: 67px;
+          }
+          #item9fea4eb9-4a4a-4070-88ad-3231e3b4a023 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件9fea4eb9-4a4a-4070-88ad-3231e3b4a023结束-->
+
+        <!-- 组件e14bb742-7e32-41b6-b395-0843e2897443开始-->
+
+        <div id="iteme14bb742-7e32-41b6-b395-0843e2897443">
+          <img
+            src="../../../static/dist/images/2386ed52-54e7-4e99-8284-f25279b9245b.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #iteme14bb742-7e32-41b6-b395-0843e2897443 {
+            width: 425px;
+            height: 111px;
+          }
+          #iteme14bb742-7e32-41b6-b395-0843e2897443 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件e14bb742-7e32-41b6-b395-0843e2897443结束-->
+      </div>
+      <!-- 分组d5716c20-e6ae-4914-8d93-e5bbb1eca317结束-->
+
+      <!-- 分组b3fa202c-b1b6-47b4-9607-c45c0389ec3c开始-->
+      <div id="itemb3fa202c-b1b6-47b4-9607-c45c0389ec3c">
+        <!-- 组件bc573f7a-d712-48c4-9ab3-3591bfd0d520开始-->
+
+        <div id="itembc573f7a-d712-48c4-9ab3-3591bfd0d520">
+          <img
+            src="../../../static/dist/images/3ef31cf6-c1a7-4307-9306-11b1aeb24459.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itembc573f7a-d712-48c4-9ab3-3591bfd0d520 {
+            width: 67px;
+            height: 67px;
+          }
+          #itembc573f7a-d712-48c4-9ab3-3591bfd0d520 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件bc573f7a-d712-48c4-9ab3-3591bfd0d520结束-->
+
+        <!-- 组件adec4900-3bac-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="itemadec4900-3bac-11ec-91b7-e1d81e5f22aa">
+          <span class="countto"></span>
+          <span class="suffix"> 个 </span>
+        </div>
+
+        <style>
+          #itemadec4900-3bac-11ec-91b7-e1d81e5f22aa {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #itemadec4900-3bac-11ec-91b7-e1d81e5f22aa .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #itemadec4900-3bac-11ec-91b7-e1d81e5f22aa .suffix {
+            color: rgba(0, 240, 255, 1);
+            font-size: 22px;
+          }
+        </style>
+        <!-- 组件adec4900-3bac-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件0f823af0-3d4a-11ec-9471-7bccdc660891开始-->
+
+        <div id="item0f823af0-3d4a-11ec-9471-7bccdc660891">
+          <p class="">事件总数</p>
+        </div>
+
+        <style>
+          #item0f823af0-3d4a-11ec-9471-7bccdc660891 {
+            line-height: 1.5;
+            font-size: 20px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #item0f823af0-3d4a-11ec-9471-7bccdc660891 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件0f823af0-3d4a-11ec-9471-7bccdc660891结束-->
+
+        <!-- 组件c420aaea-1033-414f-901b-5a9de2bf2449开始-->
+
+        <div id="itemc420aaea-1033-414f-901b-5a9de2bf2449">
+          <img
+            src="../../../static/dist/images/ec0924e8-478a-4928-b6c5-a905c24fa7f3.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemc420aaea-1033-414f-901b-5a9de2bf2449 {
+            width: 425px;
+            height: 111px;
+          }
+          #itemc420aaea-1033-414f-901b-5a9de2bf2449 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件c420aaea-1033-414f-901b-5a9de2bf2449结束-->
+      </div>
+      <!-- 分组b3fa202c-b1b6-47b4-9607-c45c0389ec3c结束-->
+
+      <!-- 分组06ebc700-3af0-11ec-8c38-11d05a58a945开始-->
+      <div id="item06ebc700-3af0-11ec-8c38-11d05a58a945">
+        <!-- 组件7382d310-3bac-11ec-91b7-e1d81e5f22aa开始-->
+
+        <div id="item7382d310-3bac-11ec-91b7-e1d81e5f22aa">
+          <span class="countto"></span>
+          <span class="suffix"> 条 </span>
+        </div>
+
+        <style>
+          #item7382d310-3bac-11ec-91b7-e1d81e5f22aa {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #item7382d310-3bac-11ec-91b7-e1d81e5f22aa .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #item7382d310-3bac-11ec-91b7-e1d81e5f22aa .suffix {
+            color: rgba(0, 240, 255, 1);
+            font-size: 22px;
+          }
+        </style>
+        <!-- 组件7382d310-3bac-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件a19e8cc0-3aef-11ec-8c38-11d05a58a945开始-->
+
+        <div id="itema19e8cc0-3aef-11ec-8c38-11d05a58a945">
+          <p class="">日志总数</p>
+        </div>
+
+        <style>
+          #itema19e8cc0-3aef-11ec-8c38-11d05a58a945 {
+            line-height: 1.5;
+            font-size: 20px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #itema19e8cc0-3aef-11ec-8c38-11d05a58a945 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件a19e8cc0-3aef-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件b2264b5d-4ddf-40bf-a9fd-5405858014a3开始-->
+
+        <div id="itemb2264b5d-4ddf-40bf-a9fd-5405858014a3">
+          <img
+            src="../../../static/dist/images/09b054cd-0729-4b8a-8a12-377f79e5be56.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemb2264b5d-4ddf-40bf-a9fd-5405858014a3 {
+            width: 67px;
+            height: 67px;
+          }
+          #itemb2264b5d-4ddf-40bf-a9fd-5405858014a3 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件b2264b5d-4ddf-40bf-a9fd-5405858014a3结束-->
+
+        <!-- 组件0e7ede94-e61f-49a8-a377-89bb6509d856开始-->
+
+        <div id="item0e7ede94-e61f-49a8-a377-89bb6509d856">
+          <img
+            src="../../../static/dist/images/d00d3961-20c8-4c71-adb8-e8d4ca384944.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item0e7ede94-e61f-49a8-a377-89bb6509d856 {
+            width: 425px;
+            height: 111px;
+          }
+          #item0e7ede94-e61f-49a8-a377-89bb6509d856 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件0e7ede94-e61f-49a8-a377-89bb6509d856结束-->
+      </div>
+      <!-- 分组06ebc700-3af0-11ec-8c38-11d05a58a945结束-->
+
+      <!-- 分组21b35b80-3aef-11ec-8c38-11d05a58a945开始-->
+      <div id="item21b35b80-3aef-11ec-8c38-11d05a58a945">
+        <!-- 组件62a1ca4d-898e-4ca5-9107-9ce74ee1993d开始-->
+
+        <div id="item62a1ca4d-898e-4ca5-9107-9ce74ee1993d">
+          <img
+            src="../../../static/dist/images/a47d293b-7009-4990-a1c4-3daf82b477ce.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item62a1ca4d-898e-4ca5-9107-9ce74ee1993d {
+            width: 10.128717811158799px;
+            height: 12.74px;
+          }
+          #item62a1ca4d-898e-4ca5-9107-9ce74ee1993d img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件62a1ca4d-898e-4ca5-9107-9ce74ee1993d结束-->
+
+        <!-- 组件d22ba470-f183-4cea-8a54-be5de8b01dc5开始-->
+
+        <div id="itemd22ba470-f183-4cea-8a54-be5de8b01dc5">
+          <img
+            src="../../../static/dist/images/573b8627-8048-4c36-843b-67ec42495136.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemd22ba470-f183-4cea-8a54-be5de8b01dc5 {
+            width: 11.751328326180257px;
+            height: 14px;
+          }
+          #itemd22ba470-f183-4cea-8a54-be5de8b01dc5 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件d22ba470-f183-4cea-8a54-be5de8b01dc5结束-->
+
+        <!-- 组件6b9093a0-3aed-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item6b9093a0-3aed-11ec-8c38-11d05a58a945">
+          <h3>设备管理情况</h3>
+        </div>
+
+        <style>
+          #item6b9093a0-3aed-11ec-8c38-11d05a58a945 {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+          }
+        </style>
+
+        <!-- 组件6b9093a0-3aed-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件eebe3e71-4c3e-4f9c-88c2-09d7546cc050开始-->
+
+        <div id="itemeebe3e71-4c3e-4f9c-88c2-09d7546cc050">
+          <img
+            src="../../../static/dist/images/09e9d361-42b7-4370-9175-c481ff5973bf.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemeebe3e71-4c3e-4f9c-88c2-09d7546cc050 {
+            width: 469.65px;
+            height: 48px;
+          }
+          #itemeebe3e71-4c3e-4f9c-88c2-09d7546cc050 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件eebe3e71-4c3e-4f9c-88c2-09d7546cc050结束-->
+      </div>
+      <!-- 分组21b35b80-3aef-11ec-8c38-11d05a58a945结束-->
+
+      <!-- 分组9d49feb0-3afa-11ec-8c38-11d05a58a945开始-->
+      <div id="item9d49feb0-3afa-11ec-8c38-11d05a58a945">
+        <!-- 组件9d49feb1-3afa-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item9d49feb1-3afa-11ec-8c38-11d05a58a945">
+          <p class="">游客（万人）</p>
+        </div>
+
+        <style>
+          #item9d49feb1-3afa-11ec-8c38-11d05a58a945 {
+            line-height: 1.5;
+            font-size: 16px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #item9d49feb1-3afa-11ec-8c38-11d05a58a945 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件9d49feb1-3afa-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件9d49feb2-3afa-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item9d49feb2-3afa-11ec-8c38-11d05a58a945">
+          <span class="countto"></span>
+          <span class="suffix"> </span>
+        </div>
+
+        <script type="text/javascript">
+          $(function () {
+            let data = [{ value: 1992 }]
+
+            $("#item9d49feb2-3afa-11ec-8c38-11d05a58a945 .countto").countTo({
+              from: 0,
+              to: data[0].value,
+              speed: 3000,
+              decimals: 2,
+              formatter: (value, options) => {
+                return (
+                  "" +
+                  value
+                    .toFixed(options.decimals)
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                )
+              },
+            })
+          })
+        </script>
+
+        <style>
+          #item9d49feb2-3afa-11ec-8c38-11d05a58a945 {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #item9d49feb2-3afa-11ec-8c38-11d05a58a945 .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #item9d49feb2-3afa-11ec-8c38-11d05a58a945 .suffix {
+            color: rgba(221, 221, 221, 1);
+            font-size: 16px;
+          }
+        </style>
+        <!-- 组件9d49feb2-3afa-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件9d49feb3-3afa-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item9d49feb3-3afa-11ec-8c38-11d05a58a945">
+          <p class="">涉旅企业（个）</p>
+        </div>
+
+        <style>
+          #item9d49feb3-3afa-11ec-8c38-11d05a58a945 {
+            line-height: 1.5;
+            font-size: 16px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #item9d49feb3-3afa-11ec-8c38-11d05a58a945 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件9d49feb3-3afa-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件9d49feb4-3afa-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item9d49feb4-3afa-11ec-8c38-11d05a58a945">
+          <span class="countto"></span>
+          <span class="suffix"> </span>
+        </div>
+
+        <script type="text/javascript">
+          $(function () {
+            let data = [{ value: 1234.56 }]
+
+            $("#item9d49feb4-3afa-11ec-8c38-11d05a58a945 .countto").countTo({
+              from: 0,
+              to: data[0].value,
+              speed: 3000,
+              decimals: 2,
+              formatter: (value, options) => {
+                return (
+                  "" +
+                  value
+                    .toFixed(options.decimals)
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                )
+              },
+            })
+          })
+        </script>
+
+        <style>
+          #item9d49feb4-3afa-11ec-8c38-11d05a58a945 {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #item9d49feb4-3afa-11ec-8c38-11d05a58a945 .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #item9d49feb4-3afa-11ec-8c38-11d05a58a945 .suffix {
+            color: rgba(221, 221, 221, 1);
+            font-size: 16px;
+          }
+        </style>
+        <!-- 组件9d49feb4-3afa-11ec-8c38-11d05a58a945结束-->
+      </div>
+      <!-- 分组9d49feb0-3afa-11ec-8c38-11d05a58a945结束-->
+
+      <!-- 分组fb2fbc00-3af9-11ec-8c38-11d05a58a945开始-->
+      <div id="itemfb2fbc00-3af9-11ec-8c38-11d05a58a945">
+        <!-- 组件c662e380-3af9-11ec-8c38-11d05a58a945开始-->
+
+        <div id="itemc662e380-3af9-11ec-8c38-11d05a58a945">
+          <p class="">游客（万人）</p>
+        </div>
+
+        <style>
+          #itemc662e380-3af9-11ec-8c38-11d05a58a945 {
+            line-height: 1.5;
+            font-size: 16px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #itemc662e380-3af9-11ec-8c38-11d05a58a945 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件c662e380-3af9-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件c2f35f40-3af9-11ec-8c38-11d05a58a945开始-->
+
+        <div id="itemc2f35f40-3af9-11ec-8c38-11d05a58a945">
+          <span class="countto"></span>
+          <span class="suffix"> </span>
+        </div>
+
+        <script type="text/javascript">
+          $(function () {
+            let data = [{ value: 1992 }]
+
+            $("#itemc2f35f40-3af9-11ec-8c38-11d05a58a945 .countto").countTo({
+              from: 0,
+              to: data[0].value,
+              speed: 3000,
+              decimals: 2,
+              formatter: (value, options) => {
+                return (
+                  "" +
+                  value
+                    .toFixed(options.decimals)
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                )
+              },
+            })
+          })
+        </script>
+
+        <style>
+          #itemc2f35f40-3af9-11ec-8c38-11d05a58a945 {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #itemc2f35f40-3af9-11ec-8c38-11d05a58a945 .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #itemc2f35f40-3af9-11ec-8c38-11d05a58a945 .suffix {
+            color: rgba(221, 221, 221, 1);
+            font-size: 16px;
+          }
+        </style>
+        <!-- 组件c2f35f40-3af9-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件b243ac90-3af9-11ec-8c38-11d05a58a945开始-->
+
+        <div id="itemb243ac90-3af9-11ec-8c38-11d05a58a945">
+          <p class="">涉旅企业（个）</p>
+        </div>
+
+        <style>
+          #itemb243ac90-3af9-11ec-8c38-11d05a58a945 {
+            line-height: 1.5;
+            font-size: 16px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #itemb243ac90-3af9-11ec-8c38-11d05a58a945 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件b243ac90-3af9-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件64f617c0-3af9-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item64f617c0-3af9-11ec-8c38-11d05a58a945">
+          <span class="countto"></span>
+          <span class="suffix"> </span>
+        </div>
+
+        <script type="text/javascript">
+          $(function () {
+            let data = [{ value: 1234.56 }]
+
+            $("#item64f617c0-3af9-11ec-8c38-11d05a58a945 .countto").countTo({
+              from: 0,
+              to: data[0].value,
+              speed: 3000,
+              decimals: 2,
+              formatter: (value, options) => {
+                return (
+                  "" +
+                  value
+                    .toFixed(options.decimals)
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                )
+              },
+            })
+          })
+        </script>
+
+        <style>
+          #item64f617c0-3af9-11ec-8c38-11d05a58a945 {
+            width: 125.91px;
+            height: 34.8px;
+            text-align: center;
+          }
+          #item64f617c0-3af9-11ec-8c38-11d05a58a945 .countto {
+            font-size: 22px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 34.8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-style: normal;
+          }
+          #item64f617c0-3af9-11ec-8c38-11d05a58a945 .suffix {
+            color: rgba(221, 221, 221, 1);
+            font-size: 16px;
+          }
+        </style>
+        <!-- 组件64f617c0-3af9-11ec-8c38-11d05a58a945结束-->
+      </div>
+      <!-- 分组fb2fbc00-3af9-11ec-8c38-11d05a58a945结束-->
+
+      <!-- 分组890a3aa0-3bae-11ec-91b7-e1d81e5f22aa开始-->
+      <div id="item890a3aa0-3bae-11ec-91b7-e1d81e5f22aa">
+        <!-- 组件67314210-3af6-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item67314210-3af6-11ec-8c38-11d05a58a945">
+          <span class="countto"></span>
+          <span class="suffix"> </span>
+        </div>
+
+        <script type="text/javascript">
+          $(function () {
+            let data = [{ value: 1234.56 }]
+
+            $("#item67314210-3af6-11ec-8c38-11d05a58a945 .countto").countTo({
+              from: 0,
+              to: data[0].value,
+              speed: 3000,
+              decimals: 0,
+              formatter: (value, options) => {
+                return (
+                  "" +
+                  value
+                    .toFixed(options.decimals)
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                )
+              },
+            })
+          })
+        </script>
+
+        <style>
+          #item67314210-3af6-11ec-8c38-11d05a58a945 {
+            width: 177.33px;
+            height: 40.89px;
+            text-align: center;
+          }
+          #item67314210-3af6-11ec-8c38-11d05a58a945 .countto {
+            font-size: 30px;
+            color: rgba(0, 240, 255, 1);
+
+            text-shadow: 0px 0px 14px rgba(15, 146, 255, 1);
+
+            line-height: 40.89px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            font-style: normal;
+          }
+          #item67314210-3af6-11ec-8c38-11d05a58a945 .suffix {
+            color: rgba(221, 221, 221, 1);
+            font-size: 16px;
+          }
+        </style>
+        <!-- 组件67314210-3af6-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件88db0588-c7ca-47a8-a6e2-3d6a76530ad1开始-->
+
+        <div id="item88db0588-c7ca-47a8-a6e2-3d6a76530ad1">
+          <p class="">接入系统数（个）</p>
+        </div>
+
+        <style>
+          #item88db0588-c7ca-47a8-a6e2-3d6a76530ad1 {
+            line-height: 1.5;
+            font-size: 16px;
+            text-align: center;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #item88db0588-c7ca-47a8-a6e2-3d6a76530ad1 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件88db0588-c7ca-47a8-a6e2-3d6a76530ad1结束-->
+      </div>
+      <!-- 分组890a3aa0-3bae-11ec-91b7-e1d81e5f22aa结束-->
+
+      <!-- 组件dd2b86f4-53d5-4283-a916-2f042850c5ec开始-->
+
+      <div id="itemdd2b86f4-53d5-4283-a916-2f042850c5ec">
+        <img
+          src="../../../static/dist/images/d621a203-f6ab-4612-ae79-cdc9465f3713.png"
+          alt=""
+        />
+      </div>
+      <style>
+        #itemdd2b86f4-53d5-4283-a916-2f042850c5ec {
+          width: 1065px;
+          height: 159px;
+        }
+        #itemdd2b86f4-53d5-4283-a916-2f042850c5ec img {
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+      <!-- 组件dd2b86f4-53d5-4283-a916-2f042850c5ec结束-->
+
+      <!-- 分组03f8b2a0-3d49-11ec-9471-7bccdc660891开始-->
+      <div id="item03f8b2a0-3d49-11ec-9471-7bccdc660891">
+        <!-- 分组7d032870-3bae-11ec-91b7-e1d81e5f22aa开始-->
+        <div id="item7d032870-3bae-11ec-91b7-e1d81e5f22aa">
+          <!-- 组件43a42d70-3d4a-11ec-9471-7bccdc660891开始-->
+
+          <div id="item43a42d70-3d4a-11ec-9471-7bccdc660891"></div>
+
+          <script type="text/javascript">
+            $(function () {
+              // 基于准备好的dom，初始化地图实例
+              const myChart = echarts.init(
+                document.getElementById(
+                  "item43a42d70-3d4a-11ec-9471-7bccdc660891"
+                )
+              )
+              // 指定地图的配置项
+              let option = {
+                geo: {
+                  map: "china",
+                  roam: false,
+                  zoom: 1,
+                  left: "center",
+                  top: "middle",
+                  bottom: "auto",
+                  right: "auto",
+                  label: {
+                    show: false,
+                    color: "rgba(241, 248, 255, 0.7)",
+                    fontSize: 10,
+                    fontWeight: "normal",
+                    fontStyle: "normal",
+                  },
+                  itemStyle: {
+                    areaColor: "rgba(0,0,0,0)",
+                    borderColor: "rgba(28, 199, 242, 0)",
+                    borderWidth: 1,
+                    borderType: "solid",
+                    shadowBlur: 0,
+                    shadowColor: "#000000",
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    opacity: 1,
+                  },
+                  emphasis: {
+                    label: {
+                      show: true,
+                      color: "#ffffff",
+                      fontSize: 18,
+                      fontWeight: "normal",
+                      fontStyle: "normal",
+                    },
+                    itemStyle: {
+                      areaColor: "rgba(0,0,0,0)",
+                      borderColor: "#ffffff",
+                      borderWidth: 1,
+                      borderType: "solid",
+                      shadowBlur: 2,
+                      shadowColor: "#000000",
+                      shadowOffsetX: 2,
+                      shadowOffsetY: 2,
+                      opacity: 1,
+                    },
+                  },
+                },
+                series: [
+                  {
+                    name: "涟漪散点",
+                    type: "effectScatter",
+                    legendHoverLink: true,
+                    rippleEffect: {
+                      color: "#f4e925",
+                      number: 3,
+                      period: 4,
+                      scale: 4,
+                      brushType: "stroke",
+                    },
+                    coordinateSystem: "geo",
+                    symbol: "circle",
+                    label: {
+                      show: false,
+                      position: "inside",
+                      rotate: 0,
+                      color: "#ffffff",
+                      fontSize: 12,
+                      backgroundColor: "rgba(0,0,0,0)",
+                    },
+                    itemStyle: {
+                      color: "#f4e925",
+                      borderColor: "#000",
+                      borderWidth: 0,
+                      borderType: "solid",
+                      borderCap: "butt",
+                      shadowBlur: 0,
+                      shadowColor: "#333333",
+                      shadowOffsetX: 0,
+                      shadowOffsetY: 0,
+                    },
+                    emphasis: {
+                      label: {
+                        show: false,
+                        position: "inside",
+                        rotate: 0,
+                        color: "#ffffff",
+                        fontSize: 12,
+                        backgroundColor: "rgba(0,0,0,0)",
+                      },
+                      itemStyle: {
+                        color: "#f4e925",
+                        borderColor: "#000",
+                        borderWidth: 0,
+                        borderType: "solid",
+                        borderCap: "butt",
+                        shadowBlur: 10,
+                        shadowColor: "#333333",
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 0,
+                      },
+                    },
+                    hoverAnimation: true,
+                    data: [
+                      { name: "海门", value: [121.15, 31.89, 9] },
+                      { name: "鄂尔多斯", value: [109.781327, 39.608266, 12] },
+                      { name: "招远", value: [120.38, 37.35, 12] },
+                      { name: "舟山", value: [122.207216, 29.985295, 12] },
+                      { name: "烟台", value: [121.39, 37.52, 28] },
+                      { name: "福州", value: [119.3, 26.08, 29] },
+                      { name: "瓦房店", value: [121.979603, 39.627114, 30] },
+                      { name: "即墨", value: [120.45, 36.38, 30] },
+                      { name: "抚顺", value: [123.97, 41.97, 31] },
+                      { name: "玉溪", value: [102.52, 24.35, 31] },
+                      { name: "张家口", value: [114.87, 40.82, 31] },
+                      { name: "阳泉", value: [113.57, 37.85, 31] },
+                      { name: "莱州", value: [119.942327, 37.177017, 32] },
+                      { name: "湖州", value: [120.1, 30.86, 32] },
+                      { name: "寿光", value: [118.73, 36.86, 40] },
+                      { name: "盘锦", value: [122.070714, 41.119997, 40] },
+                      { name: "长治", value: [113.08, 36.18, 41] },
+                      { name: "深圳", value: [114.07, 22.62, 41] },
+                      { name: "珠海", value: [113.52, 22.3, 42] },
+                      { name: "宿迁", value: [118.3, 33.96, 43] },
+                      { name: "咸阳", value: [108.72, 34.36, 43] },
+                      { name: "铜川", value: [109.11, 35.09, 44] },
+                      { name: "平度", value: [119.97, 36.77, 44] },
+                      { name: "佛山", value: [113.11, 23.05, 44] },
+                      { name: "泸州", value: [105.39, 28.91, 57] },
+                      { name: "西宁", value: [101.74, 36.56, 57] },
+                      { name: "宜宾", value: [104.56, 29.77, 58] },
+                      { name: "呼和浩特", value: [111.65, 40.82, 58] },
+                      { name: "成都", value: [104.06, 30.67, 58] },
+                      { name: "大同", value: [113.3, 40.12, 58] },
+                      { name: "镇江", value: [119.44, 32.2, 59] },
+                      { name: "桂林", value: [110.28, 25.29, 59] },
+                      { name: "张家界", value: [110.479191, 29.117096, 59] },
+                      { name: "宜兴", value: [119.82, 31.36, 59] },
+                      { name: "北海", value: [109.12, 21.49, 60] },
+                      { name: "西安", value: [108.95, 34.27, 61] },
+                      { name: "金坛", value: [119.56, 31.74, 62] },
+                      { name: "东营", value: [118.49, 37.46, 62] },
+                      { name: "牡丹江", value: [129.58, 44.6, 63] },
+                      { name: "遵义", value: [106.9, 27.7, 63] },
+                      { name: "绍兴", value: [120.58, 30.01, 163] },
+                      { name: "扬州", value: [119.42, 32.39, 164] },
+                    ],
+                    scalRatio: 5,
+                  },
+                ],
+              }
+              let source = [
+                {
+                  name: "涟漪散点",
+                  source: {
+                    type: "static",
+                    isAutoUpdate: false,
+                    autoUpdateTime: 60,
+                    filter: { isFilter: false, filterId: -1 },
+                    mapping: [
+                      {
+                        name: "name",
+                        required: true,
+                        description: "名称",
+                        type: "string",
+                        mapping: "name",
+                      },
+                      {
+                        name: "value",
+                        required: true,
+                        description: "值",
+                        type: "array",
+                        mapping: "value",
+                      },
+                    ],
+                    static: [
+                      { name: "海门", value: [121.15, 31.89, 9] },
+                      { name: "鄂尔多斯", value: [109.781327, 39.608266, 12] },
+                      { name: "招远", value: [120.38, 37.35, 12] },
+                      { name: "舟山", value: [122.207216, 29.985295, 12] },
+                      { name: "烟台", value: [121.39, 37.52, 28] },
+                      { name: "福州", value: [119.3, 26.08, 29] },
+                      { name: "瓦房店", value: [121.979603, 39.627114, 30] },
+                      { name: "即墨", value: [120.45, 36.38, 30] },
+                      { name: "抚顺", value: [123.97, 41.97, 31] },
+                      { name: "玉溪", value: [102.52, 24.35, 31] },
+                      { name: "张家口", value: [114.87, 40.82, 31] },
+                      { name: "阳泉", value: [113.57, 37.85, 31] },
+                      { name: "莱州", value: [119.942327, 37.177017, 32] },
+                      { name: "湖州", value: [120.1, 30.86, 32] },
+                      { name: "寿光", value: [118.73, 36.86, 40] },
+                      { name: "盘锦", value: [122.070714, 41.119997, 40] },
+                      { name: "长治", value: [113.08, 36.18, 41] },
+                      { name: "深圳", value: [114.07, 22.62, 41] },
+                      { name: "珠海", value: [113.52, 22.3, 42] },
+                      { name: "宿迁", value: [118.3, 33.96, 43] },
+                      { name: "咸阳", value: [108.72, 34.36, 43] },
+                      { name: "铜川", value: [109.11, 35.09, 44] },
+                      { name: "平度", value: [119.97, 36.77, 44] },
+                      { name: "佛山", value: [113.11, 23.05, 44] },
+                      { name: "泸州", value: [105.39, 28.91, 57] },
+                      { name: "西宁", value: [101.74, 36.56, 57] },
+                      { name: "宜宾", value: [104.56, 29.77, 58] },
+                      { name: "呼和浩特", value: [111.65, 40.82, 58] },
+                      { name: "成都", value: [104.06, 30.67, 58] },
+                      { name: "大同", value: [113.3, 40.12, 58] },
+                      { name: "镇江", value: [119.44, 32.2, 59] },
+                      { name: "桂林", value: [110.28, 25.29, 59] },
+                      { name: "张家界", value: [110.479191, 29.117096, 59] },
+                      { name: "宜兴", value: [119.82, 31.36, 59] },
+                      { name: "北海", value: [109.12, 21.49, 60] },
+                      { name: "西安", value: [108.95, 34.27, 61] },
+                      { name: "金坛", value: [119.56, 31.74, 62] },
+                      { name: "东营", value: [118.49, 37.46, 62] },
+                      { name: "牡丹江", value: [129.58, 44.6, 63] },
+                      { name: "遵义", value: [106.9, 27.7, 63] },
+                      { name: "绍兴", value: [120.58, 30.01, 163] },
+                      { name: "扬州", value: [119.42, 32.39, 164] },
+                    ],
+                    api: {
+                      sourcesId: -1,
+                      requestType: "GET",
+                      requestHeader: { token: null },
+                      getParam: "",
+                      postParam: {},
+                      requestUrl: "",
+                      cookie: false,
+                    },
+                    mysql: { sourcesId: -1, database: -1, sql: "" },
+                    elasticsearch: { sourcesId: -1, query: { index: "_all" } },
+                    mongodb: { sourcesId: -1, query: {}, collection: -1 },
+                    csv: {},
+                  },
+                },
+              ]
+              source.forEach((item) => {
+                const findSeries = option.series.find(
+                  (oitem) => oitem.name == item.name
+                )
+                const findSeriesIndex = option.series.findIndex(
+                  (oitem) => oitem.name == item.name
+                )
+                if (item.source.mapping !== null) {
+                  // 找映射关系
+                  const { type, isAutoUpdate, autoUpdateTime, mapping } =
+                    item.source
+
+                  if (type == "static") {
+                    // 过过滤器
+                    let data = item.source.static
+                    if (item.source.filter.isFilter) {
+                      function filterFn(data, callbackArgs) {
+                        item.source.filter.data.code
+                      }
+                      data = filterFn(data)
+                    }
+                    // 映射
+                    data = data.map((ditem) => {
+                      if (findSeries.type == "lines") {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "fromName"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "toName"
+                        ).mapping
+                        const mapping3 = mapping.find(
+                          (i) => i.name == "coords"
+                        ).mapping
+
+                        return {
+                          fromName: ditem[mapping1],
+                          toName: ditem[mapping2],
+                          coords: ditem[mapping3],
+                        }
+                      } else if (findSeries.type == "effectScatter") {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "name"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "value"
+                        ).mapping
+                        return { name: ditem[mapping1], value: ditem[mapping2] }
+                      } else if (
+                        findSeries.type == "map" &&
+                        findSeries.map.indexOf("-border") == -1
+                      ) {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "name"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "value"
+                        ).mapping
+                        return { name: ditem[mapping1], value: ditem[mapping2] }
+                      }
+                    })
+                    option.series[findSeriesIndex].symbolSize = (data) => {
+                      return data[2] / findSeries.scalRatio
+                    }
+                    option.series[findSeriesIndex].data = data
+                  } else if (type == "api") {
+                    const {
+                      requestType,
+                      requestHeader,
+                      getParam,
+                      postParam,
+                      requestUrl,
+                      cookie,
+                      sources,
+                    } = item.source.api
+                    const init = () => {
+                      $ajax({
+                        url: sources.baseURL + requestUrl + "?" + getParam,
+                        type: requestType,
+                        data: JSON.stringify(postParam),
+                        headers: JSON.stringify(requestHeader),
+                        xhrFields: { withCredentials: cookie },
+                        success: function (data) {
+                          myChart.clear()
+                          // 过滤器
+                          if (item.source.filter.isFilter) {
+                            function filterFn(data, callbackArgs) {
+                              item.source.filter.data.code
+                            }
+                            data = filterFn(data)
+                          }
+                          // 映射
+                          data = data.map((ditem) => {
+                            if (findSeries.type == "lines") {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "fromName"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "toName"
+                              ).mapping
+                              const mapping3 = mapping.find(
+                                (i) => i.name == "coords"
+                              ).mapping
+                              return {
+                                fromName: ditem[mapping1],
+                                toName: ditem[mapping2],
+                                coords: ditem[mapping3],
+                              }
+                            } else if (findSeries.type == "effectScatter") {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "name"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "value"
+                              ).mapping
+                              return {
+                                name: ditem[mapping1],
+                                value: ditem[mapping2],
+                              }
+                            } else if (
+                              findSeries.type == "map" &&
+                              findSeries.map.indexOf("-border") == -1
+                            ) {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "name"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "value"
+                              ).mapping
+                              return {
+                                name: ditem[mapping1],
+                                value: ditem[mapping2],
+                              }
+                            }
+                          })
+                          option.series[findSeriesIndex].symbolSize = (
+                            data
+                          ) => {
+                            return data[2] / findSeries.scalRatio
+                          }
+                          option.series[findSeriesIndex].data = data
+                        },
+                      })
+                    }
+                  }
+                }
+              })
+              // 获取地图的map， 并注册数据
+              $.getJSON(
+                "../../../static/dist/map/full/" + option.geo.map + ".json",
+                (e) => {
+                  const gismap = e
+                  echarts.registerMap(option.geo.map, gismap)
+                  let borderSeries = option.series.find(
+                    (item) =>
+                      item.type == "map" && item.map.indexOf("-border") != -1
+                  )
+                  if (borderSeries != undefined) {
+                    $.getJSON(
+                      "../../../static/dist/map/border/" + option.geo.map + ".json",
+                      (e2) => {
+                        const gismapBorder = e2
+                        echarts.registerMap(
+                          option.geo.map + "-border",
+                          gismapBorder
+                        )
+                        myChart.setOption(option)
+                      }
+                    )
+                  } else {
+                    myChart.setOption(option)
+                  }
+                }
+              )
+            })
+          </script>
+
+          <!-- 组件43a42d70-3d4a-11ec-9471-7bccdc660891结束-->
+
+          <!-- 组件791a9250-ac38-4ebd-8bd5-1d83640f9881开始-->
+
+          <div id="item791a9250-ac38-4ebd-8bd5-1d83640f9881"></div>
+
+          <script type="text/javascript">
+            $(function () {
+              // 基于准备好的dom，初始化地图实例
+              const myChart = echarts.init(
+                document.getElementById(
+                  "item791a9250-ac38-4ebd-8bd5-1d83640f9881"
+                )
+              )
+              // 指定地图的配置项
+              let option = {
+                visualMap: {
+                  show: true,
+                  min: 1,
+                  max: 1000,
+                  left: "12%",
+                  top: "75%",
+                  text: ["高", "低"],
+                  textStyle: { color: "#fff", fontSize: 12 },
+                  calculable: false,
+                  realtime: true,
+                  inverse: false,
+                  orient: "horizontal",
+                  padding: 5,
+                  itemWidth: 20,
+                  itemHeight: 140,
+                  inRange: {
+                    color: ["rgba(37,179,255,1)", "#277dbb"],
+                    symbolSize: [30, 100],
+                  },
+                },
+                geo: {
+                  map: "china",
+                  roam: false,
+                  zoom: 1,
+                  left: "center",
+                  top: "middle",
+                  bottom: "auto",
+                  right: "auto",
+                  label: {
+                    show: false,
+                    color: "rgba(241, 248, 255, 0.7)",
+                    fontSize: 10,
+                    fontWeight: "normal",
+                    fontStyle: "normal",
+                  },
+                  itemStyle: {
+                    areaColor: "rgba(9, 132, 255, 1)",
+                    borderColor: "rgba(18, 32, 70)",
+                    borderWidth: 0,
+                    borderType: "solid",
+                    shadowBlur: 0,
+                    shadowColor: "rgba(32, 110, 227, 1)",
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    opacity: 1,
+                  },
+                  emphasis: {
+                    label: {
+                      show: true,
+                      color: "#ffffff",
+                      fontSize: 18,
+                      fontWeight: "normal",
+                      fontStyle: "normal",
+                    },
+                    itemStyle: {
+                      areaColor: "rgba(0,0,0,0)",
+                      borderColor: "#ffffff",
+                      borderWidth: 1,
+                      borderType: "solid",
+                      shadowBlur: 2,
+                      shadowColor: "#000000",
+                      shadowOffsetX: 2,
+                      shadowOffsetY: 2,
+                      opacity: 1,
+                    },
+                  },
+                },
+                series: [
+                  {
+                    name: "外边线",
+                    type: "map",
+                    map: "china-border",
+                    roam: false,
+                    zoom: 1,
+                    left: "center",
+                    top: "middle",
+                    bottom: "auto",
+                    right: "auto",
+                    label: {
+                      show: false,
+                      color: "#ffffff",
+                      fontSize: 12,
+                      fontWeight: "normal",
+                      fontStyle: "normal",
+                    },
+                    itemStyle: {
+                      areaColor: "rgba(82, 142, 220, 0)",
+                      borderWidth: 1.5,
+                      borderColor: "rgba(28, 221, 242, 0.9)",
+                      borderType: "solid",
+                      shadowBlur: 0,
+                      shadowColor: "rgba(59, 225, 231, 1)",
+                      shadowOffsetX: 0,
+                      shadowOffsetY: 0,
+                      opacity: 1,
+                    },
+                    emphasis: {
+                      label: {
+                        show: false,
+                        color: "#ffffff",
+                        fontSize: 12,
+                        fontWeight: "normal",
+                        fontStyle: "normal",
+                      },
+                      itemStyle: {
+                        areaColor: "rgba(20,30,64,0)",
+                        borderWidth: 1.6,
+                        borderColor: "rgba(28,199,242,0.9)",
+                        borderType: "solid",
+                        shadowBlur: 5,
+                        shadowColor: "#4682B4",
+                        shadowOffsetX: "-4",
+                        shadowOffsetY: 6,
+                        opacity: 1,
+                      },
+                    },
+                    data: [],
+                  },
+                  {
+                    name: "阶梯分布",
+                    type: "map",
+                    map: "china",
+                    roam: false,
+                    zoom: 1,
+                    left: "center",
+                    top: "middle",
+                    bottom: "auto",
+                    right: "auto",
+                    label: {
+                      show: true,
+                      color: "#ffffff",
+                      fontSize: 12,
+                      fontWeight: "normal",
+                      fontStyle: "normal",
+                    },
+                    itemStyle: {
+                      areaColor: "rgba(20,30,64,0)",
+                      borderWidth: 1.5,
+                      borderColor: "rgba(93, 250, 255, 0.75)",
+                      borderType: "solid",
+                      shadowBlur: 10,
+                      shadowColor: "rgba(18, 123, 215, 0.71)",
+                      shadowOffsetX: 4,
+                      shadowOffsetY: 2,
+                      opacity: 1,
+                    },
+                    emphasis: {
+                      label: {
+                        show: false,
+                        color: "#ffffff",
+                        fontSize: 12,
+                        fontWeight: "normal",
+                        fontStyle: "normal",
+                      },
+                      itemStyle: {
+                        areaColor: "rgba(20,30,64,0)",
+                        borderWidth: 1.6,
+                        borderColor: "rgba(28,199,242,0.9)",
+                        borderType: "solid",
+                        shadowBlur: 5,
+                        shadowColor: "#4682B4",
+                        shadowOffsetX: "-4",
+                        shadowOffsetY: 6,
+                        opacity: 1,
+                      },
+                    },
+                    data: [
+                      { name: "北京市", value: 148 },
+                      { name: "天津市", value: 988 },
+                      { name: "上海市", value: 304 },
+                      { name: "重庆市", value: 655 },
+                      { name: "河北省", value: 658 },
+                      { name: "河南省", value: 972 },
+                      { name: "云南省", value: 653 },
+                      { name: "辽宁省", value: 856 },
+                      { name: "黑龙江省", value: 71 },
+                      { name: "湖南省", value: 745 },
+                      { name: "安徽省", value: 960 },
+                      { name: "山东省", value: 226 },
+                      { name: "新疆维吾尔自治区", value: 402 },
+                      { name: "江苏省", value: 679 },
+                      { name: "浙江省", value: 598 },
+                      { name: "江西省", value: 464 },
+                      { name: "湖北省", value: 752 },
+                      { name: "广西壮族自治区", value: 416 },
+                      { name: "甘肃省", value: 841 },
+                      { name: "山西省", value: 106 },
+                      { name: "内蒙古自治区", value: 179 },
+                      { name: "陕西省", value: 423 },
+                      { name: "吉林省", value: 844 },
+                      { name: "福建省", value: 577 },
+                      { name: "贵州省", value: 257 },
+                      { name: "广东省", value: 95 },
+                      { name: "青海省", value: 541 },
+                      { name: "西藏自治区", value: 44 },
+                      { name: "四川省", value: 599 },
+                      { name: "宁夏回族自治区", value: 949 },
+                      { name: "海南省", value: 125 },
+                      { name: "台湾省", value: 807 },
+                      { name: "香港特别行政区", value: 105 },
+                      { name: "澳门特别行政区", value: 403 },
+                    ],
+                  },
+                ],
+              }
+              let source = [
+                {
+                  name: "外边线",
+                  source: {
+                    type: "static",
+                    filter: { isFilter: false, filterId: -1 },
+                    isAutoUpdate: false,
+                    autoUpdateTime: 60,
+                    mapping: null,
+                    static: [],
+                    api: {
+                      sourcesId: -1,
+                      requestType: "GET",
+                      requestHeader: { token: null },
+                      getParam: "",
+                      postParam: {},
+                      requestUrl: "",
+                      cookie: false,
+                    },
+                    mysql: { sourcesId: -1, database: -1, sql: "" },
+                    elasticsearch: { sourcesId: -1, query: { index: "_all" } },
+                    mongodb: { sourcesId: -1, query: {}, collection: -1 },
+                    csv: {},
+                  },
+                },
+                {
+                  name: "阶梯分布",
+                  source: {
+                    type: "static",
+                    filter: { isFilter: false, filterId: -1 },
+                    isAutoUpdate: false,
+                    autoUpdateTime: 60,
+                    mapping: [
+                      {
+                        name: "name",
+                        required: true,
+                        description: "名称",
+                        type: "string",
+                        mapping: "name",
+                      },
+                      {
+                        name: "value",
+                        required: true,
+                        description: "值",
+                        type: "object",
+                        mapping: "value",
+                      },
+                    ],
+                    static: [
+                      { name: "北京市", value: 148 },
+                      { name: "天津市", value: 988 },
+                      { name: "上海市", value: 304 },
+                      { name: "重庆市", value: 655 },
+                      { name: "河北省", value: 658 },
+                      { name: "河南省", value: 972 },
+                      { name: "云南省", value: 653 },
+                      { name: "辽宁省", value: 856 },
+                      { name: "黑龙江省", value: 71 },
+                      { name: "湖南省", value: 745 },
+                      { name: "安徽省", value: 960 },
+                      { name: "山东省", value: 226 },
+                      { name: "新疆维吾尔自治区", value: 402 },
+                      { name: "江苏省", value: 679 },
+                      { name: "浙江省", value: 598 },
+                      { name: "江西省", value: 464 },
+                      { name: "湖北省", value: 752 },
+                      { name: "广西壮族自治区", value: 416 },
+                      { name: "甘肃省", value: 841 },
+                      { name: "山西省", value: 106 },
+                      { name: "内蒙古自治区", value: 179 },
+                      { name: "陕西省", value: 423 },
+                      { name: "吉林省", value: 844 },
+                      { name: "福建省", value: 577 },
+                      { name: "贵州省", value: 257 },
+                      { name: "广东省", value: 95 },
+                      { name: "青海省", value: 541 },
+                      { name: "西藏自治区", value: 44 },
+                      { name: "四川省", value: 599 },
+                      { name: "宁夏回族自治区", value: 949 },
+                      { name: "海南省", value: 125 },
+                      { name: "台湾省", value: 807 },
+                      { name: "香港特别行政区", value: 105 },
+                      { name: "澳门特别行政区", value: 403 },
+                    ],
+                    api: {
+                      sourcesId: -1,
+                      requestType: "GET",
+                      requestHeader: { token: null },
+                      getParam: "",
+                      postParam: {},
+                      requestUrl: "",
+                      cookie: false,
+                    },
+                    mysql: { sourcesId: -1, database: -1, sql: "" },
+                    elasticsearch: { sourcesId: -1, query: { index: "_all" } },
+                    mongodb: { sourcesId: -1, query: {}, collection: -1 },
+                    csv: {},
+                  },
+                },
+              ]
+              source.forEach((item) => {
+                const findSeries = option.series.find(
+                  (oitem) => oitem.name == item.name
+                )
+                const findSeriesIndex = option.series.findIndex(
+                  (oitem) => oitem.name == item.name
+                )
+                if (item.source.mapping !== null) {
+                  // 找映射关系
+                  const { type, isAutoUpdate, autoUpdateTime, mapping } =
+                    item.source
+
+                  if (type == "static") {
+                    // 过过滤器
+                    let data = item.source.static
+                    if (item.source.filter.isFilter) {
+                      function filterFn(data, callbackArgs) {
+                        item.source.filter.data.code
+                      }
+                      data = filterFn(data)
+                    }
+                    // 映射
+                    data = data.map((ditem) => {
+                      if (findSeries.type == "lines") {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "fromName"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "toName"
+                        ).mapping
+                        const mapping3 = mapping.find(
+                          (i) => i.name == "coords"
+                        ).mapping
+
+                        return {
+                          fromName: ditem[mapping1],
+                          toName: ditem[mapping2],
+                          coords: ditem[mapping3],
+                        }
+                      } else if (findSeries.type == "effectScatter") {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "name"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "value"
+                        ).mapping
+                        return { name: ditem[mapping1], value: ditem[mapping2] }
+                      } else if (
+                        findSeries.type == "map" &&
+                        findSeries.map.indexOf("-border") == -1
+                      ) {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "name"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "value"
+                        ).mapping
+                        return { name: ditem[mapping1], value: ditem[mapping2] }
+                      }
+                    })
+                    option.series[findSeriesIndex].symbolSize = (data) => {
+                      return data[2] / findSeries.scalRatio
+                    }
+                    option.series[findSeriesIndex].data = data
+                  } else if (type == "api") {
+                    const {
+                      requestType,
+                      requestHeader,
+                      getParam,
+                      postParam,
+                      requestUrl,
+                      cookie,
+                      sources,
+                    } = item.source.api
+                    const init = () => {
+                      $ajax({
+                        url: sources.baseURL + requestUrl + "?" + getParam,
+                        type: requestType,
+                        data: JSON.stringify(postParam),
+                        headers: JSON.stringify(requestHeader),
+                        xhrFields: { withCredentials: cookie },
+                        success: function (data) {
+                          myChart.clear()
+                          // 过滤器
+                          if (item.source.filter.isFilter) {
+                            function filterFn(data, callbackArgs) {
+                              item.source.filter.data.code
+                            }
+                            data = filterFn(data)
+                          }
+                          // 映射
+                          data = data.map((ditem) => {
+                            if (findSeries.type == "lines") {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "fromName"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "toName"
+                              ).mapping
+                              const mapping3 = mapping.find(
+                                (i) => i.name == "coords"
+                              ).mapping
+                              return {
+                                fromName: ditem[mapping1],
+                                toName: ditem[mapping2],
+                                coords: ditem[mapping3],
+                              }
+                            } else if (findSeries.type == "effectScatter") {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "name"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "value"
+                              ).mapping
+                              return {
+                                name: ditem[mapping1],
+                                value: ditem[mapping2],
+                              }
+                            } else if (
+                              findSeries.type == "map" &&
+                              findSeries.map.indexOf("-border") == -1
+                            ) {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "name"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "value"
+                              ).mapping
+                              return {
+                                name: ditem[mapping1],
+                                value: ditem[mapping2],
+                              }
+                            }
+                          })
+                          option.series[findSeriesIndex].symbolSize = (
+                            data
+                          ) => {
+                            return data[2] / findSeries.scalRatio
+                          }
+                          option.series[findSeriesIndex].data = data
+                        },
+                      })
+                    }
+                  }
+                }
+              })
+              // 获取地图的map， 并注册数据
+              $.getJSON(
+                "../../../static/dist/map/full/" + option.geo.map + ".json",
+                (e) => {
+                  const gismap = e
+                  echarts.registerMap(option.geo.map, gismap)
+                  let borderSeries = option.series.find(
+                    (item) =>
+                      item.type == "map" && item.map.indexOf("-border") != -1
+                  )
+                  if (borderSeries != undefined) {
+                    $.getJSON(
+                      "../../../static/dist/map/border/" + option.geo.map + ".json",
+                      (e2) => {
+                        const gismapBorder = e2
+                        echarts.registerMap(
+                          option.geo.map + "-border",
+                          gismapBorder
+                        )
+                        myChart.setOption(option)
+                      }
+                    )
+                  } else {
+                    myChart.setOption(option)
+                  }
+                }
+              )
+            })
+          </script>
+
+          <!-- 组件791a9250-ac38-4ebd-8bd5-1d83640f9881结束-->
+
+          <!-- 组件63af5c30-3d44-11ec-9471-7bccdc660891开始-->
+
+          <div id="item63af5c30-3d44-11ec-9471-7bccdc660891"></div>
+
+          <script type="text/javascript">
+            $(function () {
+              // 基于准备好的dom，初始化地图实例
+              const myChart = echarts.init(
+                document.getElementById(
+                  "item63af5c30-3d44-11ec-9471-7bccdc660891"
+                )
+              )
+              // 指定地图的配置项
+              let option = {
+                visualMap: null,
+                geo: {
+                  map: "china",
+                  roam: false,
+                  zoom: 1,
+                  left: "center",
+                  top: "middle",
+                  bottom: "auto",
+                  right: "auto",
+                  label: {
+                    show: false,
+                    color: "rgba(241, 248, 255, 0.7)",
+                    fontSize: 10,
+                    fontWeight: "normal",
+                    fontStyle: "normal",
+                  },
+                  itemStyle: {
+                    areaColor: "rgba(24, 73, 147, 1)",
+                    borderColor: "rgba(18, 32, 70)",
+                    borderWidth: 0,
+                    borderType: "solid",
+                    shadowBlur: 0,
+                    shadowColor: "rgba(18, 32, 70,0.4)",
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    opacity: 1,
+                  },
+                  emphasis: {
+                    label: {
+                      show: true,
+                      color: "#ffffff",
+                      fontSize: 18,
+                      fontWeight: "normal",
+                      fontStyle: "normal",
+                    },
+                    itemStyle: {
+                      areaColor: "rgba(0,0,0,0)",
+                      borderColor: "#ffffff",
+                      borderWidth: 1,
+                      borderType: "solid",
+                      shadowBlur: 2,
+                      shadowColor: "#000000",
+                      shadowOffsetX: 2,
+                      shadowOffsetY: 2,
+                      opacity: 1,
+                    },
+                  },
+                },
+                series: [],
+              }
+              let source = []
+              source.forEach((item) => {
+                const findSeries = option.series.find(
+                  (oitem) => oitem.name == item.name
+                )
+                const findSeriesIndex = option.series.findIndex(
+                  (oitem) => oitem.name == item.name
+                )
+                if (item.source.mapping !== null) {
+                  // 找映射关系
+                  const { type, isAutoUpdate, autoUpdateTime, mapping } =
+                    item.source
+
+                  if (type == "static") {
+                    // 过过滤器
+                    let data = item.source.static
+                    if (item.source.filter.isFilter) {
+                      function filterFn(data, callbackArgs) {
+                        item.source.filter.data.code
+                      }
+                      data = filterFn(data)
+                    }
+                    // 映射
+                    data = data.map((ditem) => {
+                      if (findSeries.type == "lines") {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "fromName"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "toName"
+                        ).mapping
+                        const mapping3 = mapping.find(
+                          (i) => i.name == "coords"
+                        ).mapping
+
+                        return {
+                          fromName: ditem[mapping1],
+                          toName: ditem[mapping2],
+                          coords: ditem[mapping3],
+                        }
+                      } else if (findSeries.type == "effectScatter") {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "name"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "value"
+                        ).mapping
+                        return { name: ditem[mapping1], value: ditem[mapping2] }
+                      } else if (
+                        findSeries.type == "map" &&
+                        findSeries.map.indexOf("-border") == -1
+                      ) {
+                        const mapping1 = mapping.find(
+                          (i) => i.name == "name"
+                        ).mapping
+                        const mapping2 = mapping.find(
+                          (i) => i.name == "value"
+                        ).mapping
+                        return { name: ditem[mapping1], value: ditem[mapping2] }
+                      }
+                    })
+                    option.series[findSeriesIndex].symbolSize = (data) => {
+                      return data[2] / findSeries.scalRatio
+                    }
+                    option.series[findSeriesIndex].data = data
+                  } else if (type == "api") {
+                    const {
+                      requestType,
+                      requestHeader,
+                      getParam,
+                      postParam,
+                      requestUrl,
+                      cookie,
+                      sources,
+                    } = item.source.api
+                    const init = () => {
+                      $ajax({
+                        url: sources.baseURL + requestUrl + "?" + getParam,
+                        type: requestType,
+                        data: JSON.stringify(postParam),
+                        headers: JSON.stringify(requestHeader),
+                        xhrFields: { withCredentials: cookie },
+                        success: function (data) {
+                          myChart.clear()
+                          // 过滤器
+                          if (item.source.filter.isFilter) {
+                            function filterFn(data, callbackArgs) {
+                              item.source.filter.data.code
+                            }
+                            data = filterFn(data)
+                          }
+                          // 映射
+                          data = data.map((ditem) => {
+                            if (findSeries.type == "lines") {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "fromName"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "toName"
+                              ).mapping
+                              const mapping3 = mapping.find(
+                                (i) => i.name == "coords"
+                              ).mapping
+                              return {
+                                fromName: ditem[mapping1],
+                                toName: ditem[mapping2],
+                                coords: ditem[mapping3],
+                              }
+                            } else if (findSeries.type == "effectScatter") {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "name"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "value"
+                              ).mapping
+                              return {
+                                name: ditem[mapping1],
+                                value: ditem[mapping2],
+                              }
+                            } else if (
+                              findSeries.type == "map" &&
+                              findSeries.map.indexOf("-border") == -1
+                            ) {
+                              const mapping1 = mapping.find(
+                                (i) => i.name == "name"
+                              ).mapping
+                              const mapping2 = mapping.find(
+                                (i) => i.name == "value"
+                              ).mapping
+                              return {
+                                name: ditem[mapping1],
+                                value: ditem[mapping2],
+                              }
+                            }
+                          })
+                          option.series[findSeriesIndex].symbolSize = (
+                            data
+                          ) => {
+                            return data[2] / findSeries.scalRatio
+                          }
+                          option.series[findSeriesIndex].data = data
+                        },
+                      })
+                    }
+                  }
+                }
+              })
+              // 获取地图的map， 并注册数据
+              $.getJSON(
+                "../../../static/dist/map/full/" + option.geo.map + ".json",
+                (e) => {
+                  const gismap = e
+                  echarts.registerMap(option.geo.map, gismap)
+                  let borderSeries = option.series.find(
+                    (item) =>
+                      item.type == "map" && item.map.indexOf("-border") != -1
+                  )
+                  if (borderSeries != undefined) {
+                    $.getJSON(
+                      "../../../static/dist/map/border/" + option.geo.map + ".json",
+                      (e2) => {
+                        const gismapBorder = e2
+                        echarts.registerMap(
+                          option.geo.map + "-border",
+                          gismapBorder
+                        )
+                        myChart.setOption(option)
+                      }
+                    )
+                  } else {
+                    myChart.setOption(option)
+                  }
+                }
+              )
+            })
+          </script>
+
+          <!-- 组件63af5c30-3d44-11ec-9471-7bccdc660891结束-->
+        </div>
+        <!-- 分组7d032870-3bae-11ec-91b7-e1d81e5f22aa结束-->
+
+        <!-- 组件b8297714-ab13-4caf-84d6-11d1f1f3a545开始-->
+
+        <div id="itemb8297714-ab13-4caf-84d6-11d1f1f3a545">
+          <img
+            src="../../../static/dist/images/578af1f5-99a9-44ef-82ab-ced96935889c.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #itemb8297714-ab13-4caf-84d6-11d1f1f3a545 {
+            width: 967px;
+            height: 901px;
+          }
+          #itemb8297714-ab13-4caf-84d6-11d1f1f3a545 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件b8297714-ab13-4caf-84d6-11d1f1f3a545结束-->
+      </div>
+      <!-- 分组03f8b2a0-3d49-11ec-9471-7bccdc660891结束-->
+
+      <!-- 分组3c04cb10-3aed-11ec-8c38-11d05a58a945开始-->
+      <div id="item3c04cb10-3aed-11ec-8c38-11d05a58a945">
+        <!-- 组件0f375f30-3aed-11ec-8c38-11d05a58a945开始-->
+
+        <div id="item0f375f30-3aed-11ec-8c38-11d05a58a945">
+          <h1>安全态势感知</h1>
+        </div>
+
+        <style>
+          #item0f375f30-3aed-11ec-8c38-11d05a58a945 {
+            color: #ffffff;
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+          }
+        </style>
+
+        <!-- 组件0f375f30-3aed-11ec-8c38-11d05a58a945结束-->
+
+        <!-- 组件69a86d00-f393-4439-bdb8-84c0c45b410f开始-->
+
+        <div id="item69a86d00-f393-4439-bdb8-84c0c45b410f">
+          <img
+            src="../../../static/dist/images/75d48673-d6f3-4121-ad58-9a13c3db3e43.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item69a86d00-f393-4439-bdb8-84c0c45b410f {
+            width: 1919px;
+            height: 82px;
+          }
+          #item69a86d00-f393-4439-bdb8-84c0c45b410f img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件69a86d00-f393-4439-bdb8-84c0c45b410f结束-->
+      </div>
+      <!-- 分组3c04cb10-3aed-11ec-8c38-11d05a58a945结束-->
+
+      <!-- 组件449ed208-e40a-4596-9911-3b13668904a3开始-->
+
+      <div id="item449ed208-e40a-4596-9911-3b13668904a3">
+        <img
+          src="../../../static/dist/images/76e5c5f0-aee0-464c-bd5d-1f0446f56891.png"
+          alt=""
+        />
+      </div>
+      <style>
+        #item449ed208-e40a-4596-9911-3b13668904a3 {
+          width: 1920px;
+          height: 1080px;
+        }
+        #item449ed208-e40a-4596-9911-3b13668904a3 img {
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+      <!-- 组件449ed208-e40a-4596-9911-3b13668904a3结束-->
+
+      <!-- 分组df06f980-3e1e-11ec-bded-aff6d68246d7开始-->
+      <div id="itemdf06f980-3e1e-11ec-bded-aff6d68246d7">
+        <!-- 组件1cb840f3-3c89-4d77-8f0f-b129375605f2开始-->
+
+        <div id="item1cb840f3-3c89-4d77-8f0f-b129375605f2">
+          <img
+            src="../../../static/dist/images/4e0fa607-b8c3-4669-a931-87ca1e38f06d.png"
+            alt=""
+          />
+        </div>
+        <style>
+          #item1cb840f3-3c89-4d77-8f0f-b129375605f2 {
+            width: 56px;
+            height: 55px;
+          }
+          #item1cb840f3-3c89-4d77-8f0f-b129375605f2 img {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <!-- 组件1cb840f3-3c89-4d77-8f0f-b129375605f2结束-->
+
+        <!-- 组件df06f982-3e1e-11ec-bded-aff6d68246d7开始-->
+
+        <div id="itemdf06f982-3e1e-11ec-bded-aff6d68246d7">
+          <h2>小提示：</h2>
+        </div>
+
+        <style>
+          #itemdf06f982-3e1e-11ec-bded-aff6d68246d7 {
+            color: rgba(255, 235, 59, 1);
+            display: flex;
+            text-align: center;
+            line-height: 1;
+            justify-content: center;
+            align-items: center;
+          }
+        </style>
+
+        <!-- 组件df06f982-3e1e-11ec-bded-aff6d68246d7结束-->
+
+        <!-- 组件df06f983-3e1e-11ec-bded-aff6d68246d7开始-->
+
+        <div id="itemdf06f983-3e1e-11ec-bded-aff6d68246d7">
+          <p class="">
+            中间地图区域使用了3层地图错位加边框投影实现的伪3D效果，详细可查看地图控件属性，数字类型的数据都使用开启了定时器去刷新数据，其中对左侧、右侧、顶部、底部以及中间地图都做了动画效果，在初次进入大屏会产生效果，图层默认都是锁定状态，需手动解除即可操作
+          </p>
+        </div>
+
+        <style>
+          #itemdf06f983-3e1e-11ec-bded-aff6d68246d7 {
+            line-height: 1.5;
+            font-size: 20px;
+            text-align: left;
+            font-weight: normal;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+          }
+
+          #itemdf06f983-3e1e-11ec-bded-aff6d68246d7 .rich-text {
+            white-space: nowrap;
+            overflow: visible;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-top: -2px;
+          }
+        </style>
+        <!-- 组件df06f983-3e1e-11ec-bded-aff6d68246d7结束-->
+      </div>
+      <!-- 分组df06f980-3e1e-11ec-bded-aff6d68246d7结束-->
+
+      <!-- 组件b3947d2c-a612-4d64-bce8-aaf9e4045c0d开始-->
+
+      <div id="itemb3947d2c-a612-4d64-bce8-aaf9e4045c0d">
+        <img
+          src="../../../static/dist/images/1baca667-57c2-465b-8c6f-9ef061c41ec9.png"
+          alt=""
+        />
+      </div>
+      <style>
+        #itemb3947d2c-a612-4d64-bce8-aaf9e4045c0d {
+          width: 172.33px;
+          height: 151.33px;
+        }
+        #itemb3947d2c-a612-4d64-bce8-aaf9e4045c0d img {
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+      <!-- 组件b3947d2c-a612-4d64-bce8-aaf9e4045c0d结束-->
+    </div>
+  </body>
+  <script>
+    /**
+     *
+     * @param {*} id
+     * @param {*} animations
+     * 声明初始值
+     * 判断动画是否结束
+     */
+
+    function playAnimation(id, animations) {
+      let index = 0
+      let ele = document.querySelector(id)
+      setAnimation(ele, animations[index])
+      ele.addEventListener("webkitAnimationEnd", function () {
+        if (index < animations.length - 1) {
+          index++
+          setAnimation(ele, animations[index])
+        }
+      })
+    }
+
+    /**
+     *
+     * @param {*} element
+     * @param {*} animation
+     * 取index对应的动画
+     * 给元素animation重新赋值
+     */
+
+    function setAnimation(element, animation) {
+      const action = `${animation.duration * 1000}ms ease ${
+        animation.delayed * 1000
+      }ms ${
+        animation.loop ? "infinite" : animation.frequency
+      } normal both running ${animation.type}`
+      element.style.animation = action
+    }
+
+    // 自适应宽度处理
+
+    document.getElementsByClassName("container")[0].style.zoom =
+      document.body.clientWidth / 1920
+
+    // 窗口发生改变自动刷新页面
+    $(window).resize(function () {
+      location.reload()
+    })
+  </script>
+</html>

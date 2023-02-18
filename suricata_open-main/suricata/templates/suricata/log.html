@@ -1,0 +1,174 @@
+{%extends "base.html"%}
+
+{% block headercss %}
+
+<style>
+
+    td{word-break:break-all;}
+    </style>
+
+
+{% endblock %}
+
+{% block contentWrapper%}
+
+<div class="content-wrapper">
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+
+
+            <div class="box-header">
+              <h3 style="float:left" class="box-title">安全日志</h3>
+
+                    <!-- <a style="float:right" href="/suricata/monitor/">&nbsp;&nbsp;&nbsp;&nbsp;suricata监控配置</a> -->
+
+            </div>
+            <div class="box-body">
+
+                <table id="suricata_list_table" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+				  <th style="white-space:nowrap">时间</th>
+                  <th style="white-space:nowrap">接口</th>
+				  <th style="white-space:nowrap">攻击ip</th>
+                  <th style="white-space:nowrap">被攻击ip</th>
+                  <th style="white-space:nowrap">威胁等级</th>
+                  <th style="white-space:nowrap">漏洞</th>
+                  <th style="white-space:nowrap">攻击详情</th>
+                  <!-- <th style="white-space:nowrap">操作</th> -->
+
+                </tr>
+                </thead>
+                <tbody>
+
+
+				{% for log in  data%}
+						<tr>
+							<td>{{log.time}}</td>
+							<td>{{log.in_iface}}</td>
+							<td style="white-space:nowrap">
+							{{log.attack_ip}}
+							</td>
+							<td style="white-space:nowrap">
+                                {{log.victim_ip}}
+							</td>
+              {%if log.level == 'warning'%}
+                <td class="text-warning">中危</td>
+              {%else%}
+                <td class="text-danger">高危</td>
+              {% endif %}
+							
+              {%if log.vul == None %}
+              <td >疑似攻击</td>
+              {%else%}
+              <td>{{log.vul}}</td>
+
+              {% endif %}
+
+              <!-- {%if log.payload == None %}
+              <td>暂无详情，请手动验证</td>
+              {% else %}
+              <td >{{log.payload}}</td>
+              {% endif %} -->
+
+                            <td>
+                                <a href="/suricata/logstat/{{log.id}}/">查看详情</a>
+								<!-- <a onclick="delSuri('{{s.id}}')">删除</a> -->
+                            </td>
+						</tr>
+				{% endfor %}
+
+
+
+
+                </tbody>
+
+              </table>
+            </div>
+
+
+
+
+
+
+
+            <!-- /.box -->
+          </div>
+		</div>
+
+	</div> <!-- /.row-->
+
+
+
+
+
+	</section>
+</div>
+{% endblock %}
+{% block bodyjs %}
+
+<script src="/static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="/static/bower_components/datatables.net-bs/js/dataTables.buttons.min.js"></script>
+    <script src="/static/bower_components/datatables.net-bs/js/jszip.min.js"></script>
+    <script src="/static/bower_components/datatables.net-bs/js/buttons.html5.min.js"></script>
+
+    <script src="/static/bower_components/moment/min/moment.min.js"></script>
+    <script src="/static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<script>
+
+function mFunc(){
+    var datatable = $("#xray_list_table").DataTable();
+    if (datatable) {
+        datatable.clear();    //清空数据
+        datatable.destroy();         //销毁datatable
+    }
+    tabledata();
+    //table.ajax.reload();
+}
+
+  $(function () {
+
+    $('#example').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+	$('#suricata_list_table').DataTable({
+		"pageLength": 25,
+		'autoWidth'   : true
+	})
+  })
+
+
+</script>
+<script>
+    function delSuri(r_id){
+	if(window.confirm('确定删除？')){
+		$.ajax({
+			type: "GET",
+
+			url:"/suricata/delmor/"+r_id+'/',
+				success:function (result) {
+					if (result.code == 0) {
+						alert('删除成功');
+						window.location.href="/suricata/morlist/";
+					}else{
+						alert('异常，请检查');
+					};
+
+				},
+				error:function(){
+					alert("异常");
+				}
+		});
+	}
+}
+</script>
+{% endblock %}

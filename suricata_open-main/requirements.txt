@@ -1,0 +1,6 @@
+Django
+elasticsearch
+pymysql
+MySQLdb
+smtplib
+email
