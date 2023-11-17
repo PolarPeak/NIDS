@@ -6,8 +6,8 @@ es_url = "http://"+es_ip+":"+es_port
 
 SMTP_HOST = 'smtp.qq.com'
 SMTP_PORT = 25
-SMTP_SENDER = '1730973253@qq.com'
-RECEIVERS = ['1730973253@qq.com']
+SMTP_SENDER = '@qq.com'
+RECEIVERS = ['@qq.com']
 
 db_host = '127.0.0.1'
 db_port = 3306
